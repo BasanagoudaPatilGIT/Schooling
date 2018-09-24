@@ -20,7 +20,24 @@
     }
     
     $data['id'] = $max_id;
+	
     return $this->db->insert('tab_Students', $data);
+    }
+	
+	public function add_registration_record($data)
+    {
+    //SELECT MAX ID
+    $max_id = 1;
+    $this->db->select_max('id');
+    $query = $this->db->get('tab_registration');
+    $row = $query->row();
+    if (isset($row))
+    {
+    $max_id = $row->id + 1;
+    }
+    
+    $data['id'] = $max_id;
+    return $this->db->insert('tab_registration', $data);
     }
 	
 	public function add_parent_record($data)

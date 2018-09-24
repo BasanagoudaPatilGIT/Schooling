@@ -12,6 +12,7 @@ class Teachers extends CI_Controller {
 		}
 		
 		$this->load->model('Teachers_model');
+		$this->load->model('User_model');
 		$this->load->model('Combo_model');
 	}
 	
@@ -26,7 +27,8 @@ class Teachers extends CI_Controller {
 		$data['cbo_sex'] = $this->Combo_model->cbo_sex();
 		$data['cbo_blood_group'] = $this->Combo_model->cbo_blood_group();
 		$data['cbo_country'] = $this->Combo_model->cbo_country();
-	
+		$data['teacher_count'] = $this->Teachers_model->series_count($usertype = 4);
+		//print_r($teacher_count);
 	    // Field Validation
 		$this->form_validation->set_rules('firstname','First Name','required');
 		$this->form_validation->set_rules('middlename','Middle Name','required');
@@ -62,7 +64,7 @@ class Teachers extends CI_Controller {
 			
 			$this->load->library('upload', $config);
 			
-			$displaypicture ='Capture.jpg';
+			//$displaypicture ='Capture.jpg';
 			//echo($displaypicture);
 			if( !$this->upload->do_upload('displaypicture') ){
 				print_r($this->upload->display_errors());
@@ -70,32 +72,68 @@ class Teachers extends CI_Controller {
 				$displaypicture = $_FILES['displaypicture']['name'];
 			}
 			
+			$std_status ='Active';
+			$std_gender = $this->input->post('cbo_sex');
+			$std_first_name = $this->input->post('firstname');
+			$std_middle_name = $this->input->post('middlename');
+			$std_last_name = $this->input->post('lastname');
+			$std_email_id = $this->input->post('email');
+			$std_mobile_no = $this->input->post('phone');
+			$std_username = $this->input->post('username');
+			$std_password = base64_encode($this->input->post('password'));
+			$std_address = $this->input->post('address');
+			$std_img_name = $displaypicture;
+			$std_count = $teacher_count['count'];
+			
 		$data =array
 			(
-				'status'=>'Active',
-				'user_type'=>'Teacher',
-				'first_name'=>$this->input->post('firstname'),
-				'middle_name'=>$this->input->post('middlename'),
-				'last_name'=>$this->input->post('lastname'),
-				'email'=>$this->input->post('email'),
+				'status'=>$std_status,
+				'user_type'=>4,
+				'first_name'=>$std_first_name,
+				'middle_name'=>$std_middle_name,
+				'last_name'=>$std_last_name,
+				'email'=>$std_email_id,
 				'date_of_birth'=>$this->input->post('dob'),
-				'gender_id'=>$this->input->post('cbo_sex'),
-				'address'=>$this->input->post('address'),
+				'gender_id'=>$std_gender,
+				'address'=>$std_address,
 				'city'=>$this->input->post('city'),
 				'country_id'=>$this->input->post('cbo_country'),
 				'zipcode'=>$this->input->post('zipcode'),
 				'phone'=>$this->input->post('phone'),
 				'blood_group_id'=>$this->input->post('cbo_blood_group'),
-				'username'=>$this->input->post('username'),
-				'password'=>$this->input->post('password'),
 				'qualification'=>$this->input->post('qual'),
 				'position'=>$this->input->post('position'),
 				'date_of_joining'=>$this->input->post('doj'),
-				'displaypicture'=>$displaypicture
+				'displaypicture'=>$displaypicture,
+				'emp_code'=>$std_count
 				
 			);				
 			$this->Teachers_model->add_record($data);
+			$data = array (
 			
+			'count' => $std_count + 1,
+			);
+			
+			$this->Teachers_model->update_series_count($data,$usertype=4);
+			
+			$data =array
+			(
+				'status'=>$std_status,
+				'user_type'=>4,
+				'gender'=>$std_gender,
+				'first_name'=>$std_first_name,
+				'middle_name'=>$std_middle_name,
+				'last_name'=>$std_last_name,
+				'email_id'=>$std_email_id,
+				'mobile_no'=>$std_mobile_no,
+				'username'=>$std_username,
+				'password'=>$std_password,
+				'address'=>$std_address,
+				'img_name'=>$displaypicture
+				
+			);
+			
+			$this->User_model->add_record($data);
 			echo '<script>alert("Record Added Successfully.");</script>';
 			
 			redirect(base_url().'index.php/Teachers/grid_view'); 

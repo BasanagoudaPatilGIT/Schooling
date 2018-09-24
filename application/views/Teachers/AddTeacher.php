@@ -142,7 +142,7 @@
 		  <div class="row">
               <div class="col-sm-6 form-group">
                 <label for="empcode">Employee Code</label>
-                <input type="text" class="form-control" id="EmpCode" name="EmpCode" placeholder="Employee Code" disabled="disabled" title="Auto generated value Not editable" value="">
+                <input type="text" class="form-control" id="EmpCode" name="EmpCode" placeholder="Employee Code" readonly="" title="Auto generated value Not editable" value="<?php echo $teacher_count['user_type_name']; echo " - "; echo $teacher_count['count'] ?>">
               </div>
 			  <div class="col-sm-6 form-group">
                 <label for="position">Current Position</label><span style="color:#FF0000">*</span>
@@ -159,7 +159,7 @@
               </div>
               <div class="col-sm-6 form-group">
                 <label for="Dol">Date of Releaving</label>
-                <input type="text" class="form-control datepicker" id="dol" name="dol" value="" placeholder="Date of Leave"  
+                <input type="text" class="form-control datepicker" id="dol" name="dol" value="" placeholder="Date of Releaving" readonly=""  
 				value="<?php echo set_value('dol')?>"><?php echo form_error('dol','<div style="color:#FF0000;">','</div>'); ?>
               </div>
             </div>

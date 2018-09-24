@@ -11,9 +11,9 @@ class Login_info_model extends CI_Model
 	public function validate()
 	{
 		
-		$mailid = $this->input->post('email_id');
+		$user_name = $this->input->post('user_name');
 		$password = base64_encode($this->input->post('password'));
-		$this->db->where('email_id', $mailid );
+		$this->db->where('username', $user_name );
 		$this->db->where('password', $password );
 		$query= $this->db->get('tab_registration');
 		print_r( $query->row_array() );
@@ -26,11 +26,11 @@ class Login_info_model extends CI_Model
 	}
 	
 	
-	public function get_user_detail($email_id,$password)
+	public function get_user_detail($user_name,$password)
 	{
 		$this->db->select('r.*,u.user_type_name');
 		$this->db->from('tab_registration as r');
-		$this->db->where('email_id', $email_id);
+		$this->db->where('username', $user_name);
 		$this->db->where('password', $password);
 		$this->db->join('tab_user_type as u', 'u.id = r.user_type','left');
 		$query = $this->db->get();

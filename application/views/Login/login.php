@@ -26,7 +26,7 @@
 		 <p style="text-align:center; font-size:16px; font-weight:bolder; color:#FF0000;"><?php echo $this->session->flashdata('msg'); ?></p>
 		
           <div class="form-group">
-            <input class="form-control" name="email_id" id="email_id" type="text"  placeholder="Enter User Name" required>
+            <input class="form-control" name="user_name" id="user_name" type="text"  placeholder="User Name" required>
 		  </div>
           <div class="form-group">
             <input class="form-control" name="password" id="password" type="password" placeholder="Password" required>

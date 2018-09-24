@@ -33,9 +33,9 @@ class Login extends CI_Controller {
 		
 		if($query)
 		{
-			$email_id = $this->input->post('email_id');
+			$user_name = $this->input->post('user_name');
 			$password = base64_encode($this->input->post('password'));
-			$loginData['login_data'] = $this->Login_info_model->get_user_detail($email_id,$password);
+			$loginData['login_data'] = $this->Login_info_model->get_user_detail($user_name,$password);
 			$data=array(				
 				'IS_LOGGED_IN'=>'TRUE',
 				'ID'=> $loginData['login_data']['id'],

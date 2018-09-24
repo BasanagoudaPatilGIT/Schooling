@@ -14,6 +14,7 @@ class Students extends CI_Controller {
 		
 		$this->load->model('Students_model');
 		$this->load->model('Combo_model');
+		$this->load->model('User_model');
 	}
 	
 	public function index()
@@ -66,9 +67,11 @@ class Students extends CI_Controller {
 		$this->form_validation->set_rules('pconfirmPassword','Confirm Password','required|max_length[12]|min_length[8]|matches[ppassword]');
 		$this->form_validation->set_rules('pqual','Qualification','required');
 		$this->form_validation->set_rules('profession','Profession','required');
+		
+		$data['title'] = $_SESSION['TITLE'].''."- Add Student";
 		if(($this->form_validation->run())==false)
 		{
-			$this->load->view('Home/header');
+			$this->load->view('Home/header',$data);
 			$this->load->view('Home/menu');
 			$this->load->view('Students/AddStudent',$data);
 			$this->load->view('Home/footer');
@@ -92,36 +95,41 @@ class Students extends CI_Controller {
 				$displaypicture = $_FILES['displaypicture']['name'];
 			}
 			
-			$pdisplaypicture ='Capture.jpg';
-			//echo($pdisplaypicture);
-			if( !$this->upload->do_upload('pdisplaypicture') ){
-				print_r($this->upload->display_errors());
-			}else{
-				$displaypicture = $_FILES['pdisplaypicture']['name'];
-			}
+			
+			$std_status ='Active';
+			$std_gender = $this->input->post('cbo_sex');
+			$std_first_name = $this->input->post('firstname');
+			$std_middle_name = $this->input->post('middlename');
+			$std_last_name = $this->input->post('lastname');
+			$std_email_id = $this->input->post('email');
+			$std_mobile_no = $this->input->post('phone');
+			$std_username = $this->input->post('username');
+			$std_password = base64_encode($this->input->post('password'));
+			$std_address = $this->input->post('peraddress');
+			$std_img_name = $displaypicture;
 			
 		$data =array
 			(
-				'status'=>'Active',
-				'user_type'=>'Student',
-				'first_name'=>$this->input->post('firstname'),
-				'middle_name'=>$this->input->post('middlename'),
-				'last_name'=>$this->input->post('lastname'),
-				'email'=>$this->input->post('email'),
+				'status'=>$std_status,
+				'user_type'=>3,
+				'first_name'=>$std_first_name,
+				'middle_name'=>$std_middle_name,
+				'last_name'=>$std_last_name,
+				'email'=>$std_email_id,
 				'date_of_birth'=>$this->input->post('dob'),
-				'gender_id'=>$this->input->post('cbo_sex'),
+				'gender_id'=>$std_gender,
 				'address'=>$this->input->post('address'),
 				'city'=>$this->input->post('city'),
 				'country_id'=>$this->input->post('cbo_country'),
 				'zipcode'=>$this->input->post('zipcode'),
-				'per_address'=>$this->input->post('peraddress'),
+				'per_address'=>$std_address,
 				'per_city'=>$this->input->post('percity'),
 				'per_country_id'=>$this->input->post('percbo_country'),
 				'per_zipcode'=>$this->input->post('perzipcode'),
-				'phone'=>$this->input->post('phone'),
+				'phone'=>$std_mobile_no ,
 				'blood_group_id'=>$this->input->post('cbo_blood_group'),
-				'username'=>$this->input->post('username'),
-				'password'=>$this->input->post('password'),
+				//'username'=>$std_username,
+				//'password'=>$std_password,
 				'date_of_joining'=>$this->input->post('doj'),
 				'roll_num'=>$this->input->post('rollnum'),
 				'class_id'=>$this->input->post('cbo_class'),
@@ -129,6 +137,26 @@ class Students extends CI_Controller {
 				
 			);			
 			$this->Students_model->add_record($data);
+			
+			$data =array
+			(
+				'status'=>$std_status,
+				'user_type'=>3,
+				'gender'=>$std_gender,
+				'first_name'=>$std_first_name,
+				'middle_name'=>$std_middle_name,
+				'last_name'=>$std_last_name,
+				'email_id'=>$std_email_id,
+				'mobile_no'=>$std_mobile_no,
+				'username'=>$std_username,
+				'password'=>$std_password,
+				'address'=>$std_address,
+				'img_name'=>$displaypicture
+				
+			);	
+			
+			$this->User_model->add_record($data);
+			
 			$stud_count = $this->Students_model->classwise_students_count($this->input->post('cbo_class'));
 			print_r($stud_count);
 			//SELECT MAX ID
@@ -140,22 +168,40 @@ class Students extends CI_Controller {
 			{
 				$student_id = $row->id;
 			}
-			
+			//////$pdisplaypicture ='Capture.jpg';
+			//echo($pdisplaypicture);
+			if( !$this->upload->do_upload('pdisplaypicture') ){
+				print_r($this->upload->display_errors());
+			}else{
+				$pdisplaypicture = $_FILES['pdisplaypicture']['name'];
+			}
+			$par_status ='Active';
+			$par_user_type = $this->input->post('cbo_user_type');
+			$par_gender = $this->input->post('pcbo_sex');
+			$par_first_name = $this->input->post('pfirstname');
+			$par_middle_name = $this->input->post('pmiddlename');
+			$par_last_name = $this->input->post('plastname');
+			$par_email_id = $this->input->post('pemail');
+			$par_mobile_no = $this->input->post('pphone');
+			$par_username = $this->input->post('pusername');
+			$par_password = base64_encode($this->input->post('ppassword'));
+			$par_address = $this->input->post('peraddress');
+			$par_img_name = $pdisplaypicture;
 			
 			$data =array
 			(
-				'status'=>'Active',
-				'user_type'=>'Parents',
-				'first_name'=>$this->input->post('pfirstname'),
-				'middle_name'=>$this->input->post('pmiddlename'),
-				'last_name'=>$this->input->post('plastname'),
-				'email'=>$this->input->post('pemail'),
+				'status'=>$par_status,
+				'user_type'=>5,
+				'first_name'=>$par_first_name,
+				'middle_name'=>$par_middle_name,
+				'last_name'=>$par_last_name,
+				'email'=>$par_email_id,
 				'date_of_birth'=>$this->input->post('pdob'),
-				'gender_id'=>$this->input->post('pcbo_sex'),
-				'phone'=>$this->input->post('pphone'),
+				'gender_id'=>$par_gender,
+				'phone'=>$par_mobile_no,
 				'blood_group_id'=>$this->input->post('pcbo_blood_group'),
-				'username'=>$this->input->post('username'),
-				'password'=>$this->input->post('password'),
+				//'username'=>$par_username,
+				//'password'=>$par_password,
 				'qualification'=>$this->input->post('pqual'),
 				'profession'=>$this->input->post('profession'),
 				'displaypicture'=>$pdisplaypicture,
@@ -164,6 +210,29 @@ class Students extends CI_Controller {
 			);				
 			$this->Students_model->add_parent_record($data);
 			
+			print_r($data);
+			
+			$data =array
+			(
+				'status'=>$par_status,
+				'first_name'=>$par_first_name,
+				'middle_name'=>$par_middle_name,
+				'last_name'=>$par_last_name,
+				'email_id'=>$par_email_id,
+				'mobile_no'=>$par_mobile_no,
+				'username'=>$par_username,
+				'password'=>$par_password,
+				'address'=>$par_address,
+				'gender'=>$par_gender,
+				'img_name'=>$pdisplaypicture,
+				'user_type'=> 5
+				
+			);	
+			
+			
+			
+			
+			$this->User_model->add_record($data);
 			echo '<script>alert("Record Added Successfully.");</script>';
 			
 			redirect(base_url().'index.php/Students/grid_view'); 
@@ -340,12 +409,12 @@ class Students extends CI_Controller {
 	public function grid_view()
 	{
 			
-		
+		$data['title'] = $_SESSION['TITLE'].''."- Student list";
 		//GET DATA FROM TABLE
 		$order_by = 'DESC';	
 		//$usertype = 'Admin';	
 		$data['student'] = $this->Students_model->view_record('');
-		$this->load->view('Home/header');
+		$this->load->view('Home/header',$data);
 		$this->load->view('Home/menu');
 		$this->load->view('Students/StudentsList',$data);
 		$this->load->view('Home/footer');	

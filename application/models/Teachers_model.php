@@ -12,19 +12,15 @@
     {
     //SELECT MAX ID
     $max_id = 1;
-	$emp_code = 001;
     $this->db->select_max('id');
-	$this->db->select_max('emp_code');
     $query = $this->db->get('tab_teachers');
     $row = $query->row();
     if (isset($row))
     {
     $max_id = $row->id + 1;
-	$emp_code = $row->emp_code + 1;
     }
     
     $data['id'] = $max_id;
-	$data['emp_code'] = $emp_code;
     return $this->db->insert('tab_teachers', $data);
     }
     
@@ -92,6 +88,19 @@
     
     return $this->db->count_all_results('tab_teachers');
     }
-    
-    
+     public function series_count($usertype)
+    {
+		$this->db->select('count,u.user_type_name');
+		$this->db->from('tab_series as r');
+		$this->db->join('tab_user_type as u','u.id = r.user_type', 'left');
+		$this->db->where('user_type',$usertype );
+		$query = $this->db->get();
+		return $query->row_array();
+	}
+	public function update_series_count($data,$usertype)
+    {
+		$this->db->where('user_type', $usertype);
+		$this->db->update('tab_series', $data);
+	}
+	
     }
