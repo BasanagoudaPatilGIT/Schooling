@@ -477,7 +477,24 @@ $('#testupload').click( function(){
 		getTotal()
 	}
    });//FAMILY END
+</script>
 
+<script>
+//Class and Roll Number chnages
+
+			$('#cbo_class').change( function(){
+				var id = $('#cbo_class').val();
+				//alert(id);
+				
+				$.ajax({
+					url:"<?php echo base_url();?>json/get_student_rollnum/"+id,
+					success: function(data){
+						//alert(id);
+						$("#rollnum").val(data.count);
+					},
+					error: function(){alert('Error');}
+				});
+			});
 </script>
 </body>
 </html>

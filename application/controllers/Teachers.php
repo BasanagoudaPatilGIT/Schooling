@@ -18,7 +18,7 @@ class Teachers extends CI_Controller {
 	
 	public function index()
 	{
-		redirect(base_url().'index.php/Teachers/grid_view'); 
+		redirect(base_url().'Teachers/grid_view'); 
 	}
 	
 	
@@ -45,10 +45,11 @@ class Teachers extends CI_Controller {
 		$this->form_validation->set_rules('phone','Phone Number','required');
 		$this->form_validation->set_rules('zipcode','Zipcode','required|max_length[6]|min_length[6]');
 		
+		$data['title'] = $_SESSION['TITLE'].''."- Add Teacher";
 		
 		if(($this->form_validation->run())==false)
 		{
-			$this->load->view('Home/header');
+			$this->load->view('Home/header',$data);
 			$this->load->view('Home/menu');
 			$this->load->view('Teachers/AddTeacher',$data);
 			$this->load->view('Home/footer');
@@ -83,7 +84,8 @@ class Teachers extends CI_Controller {
 			$std_password = base64_encode($this->input->post('password'));
 			$std_address = $this->input->post('address');
 			$std_img_name = $displaypicture;
-			$std_count = $teacher_count['count'];
+			$std_count = (int)$teacher_count['count'];
+			
 			
 		$data =array
 			(
@@ -105,14 +107,18 @@ class Teachers extends CI_Controller {
 				'position'=>$this->input->post('position'),
 				'date_of_joining'=>$this->input->post('doj'),
 				'displaypicture'=>$displaypicture,
-				'emp_code'=>$std_count
+				'emp_code'=>$this->input->post('EmpCode')
 				
 			);				
 			$this->Teachers_model->add_record($data);
+			
 			$data = array (
 			
-			'count' => $std_count + 1,
+			'count' => (int)$std_count + 1,
+			
 			);
+			
+			//print_r($data['count']);
 			
 			$this->Teachers_model->update_series_count($data,$usertype=4);
 			
@@ -134,9 +140,13 @@ class Teachers extends CI_Controller {
 			);
 			
 			$this->User_model->add_record($data);
-			echo '<script>alert("Record Added Successfully.");</script>';
-			
-			redirect(base_url().'index.php/Teachers/grid_view'); 
+			$this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon fa fa-times"></i></button>
+				
+				<i class="icon fa fa-trash-o"></i> Record Added Successfully.
+			  </div>
+			  ');
+			redirect(base_url().'Teachers/grid_view'); 
 
 		}
 		
@@ -168,13 +178,14 @@ class Teachers extends CI_Controller {
 		$this->form_validation->set_rules('cbo_sex','Gender','required');
 		$this->form_validation->set_rules('qual','Qualification','required');
 		$this->form_validation->set_rules('position','Position','required');
-		$this->form_validation->set_rules('phone','Phone Number','required');
+		$this->form_validation->set_rules('phone','Phone Number','required|max_length[12]|min_length[10]');
 		$this->form_validation->set_rules('zipcode','Zipcode','required|max_length[6]|min_length[6]');
 		
+		$data['title'] = $_SESSION['TITLE'].''."- Update Teacher";
 		
 		if(($this->form_validation->run())==false)
 		{
-			$this->load->view('Home/header');
+			$this->load->view('Home/header',$data);
 			$this->load->view('Home/menu');
 			$this->load->view('Teachers/UpdateTeacher',$data);
 			$this->load->view('Home/footer');
@@ -228,20 +239,25 @@ class Teachers extends CI_Controller {
 				'zipcode'=>$this->input->post('zipcode'),
 				'phone'=>$this->input->post('phone'),
 				'blood_group_id'=>$this->input->post('cbo_blood_group'),
-				'username'=>$this->input->post('username'),
-				'password'=>$this->input->post('password'),
+				//'username'=>$this->input->post('username'),
+				//'password'=>$this->input->post('password'),
 				'qualification'=>$this->input->post('qual'),
 				'position'=>$this->input->post('position'),
 				'date_of_joining'=>$this->input->post('doj'),
-				'displaypicture'=>$displaypicture
+				'displaypicture'=>$displaypicture,
+				'emp_code'=>$this->input->post('EmpCode')
 				
 			);				
 			$this->Teachers_model->edit_record($id,$data);
-			 echo '<script>alert("Record Updated Successfully.");</script>';
-			
+			$this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon fa fa-times"></i></button>
+				
+				<i class="icon fa fa-trash-o"></i> Record Updated Successfully.
+			  </div>
+			  ');
 			//$this->session->set_flashdata('msg','alert(<i class="icon fa fa-check"></i> Record Updated Successfully.)');
 				  
-			redirect(base_url().'index.php/Teachers/grid_view','refresh'); 			
+			redirect(base_url().'Teachers/grid_view','refresh'); 			
 		}		
 	}
 	
@@ -252,8 +268,8 @@ class Teachers extends CI_Controller {
 		$order_by = 'DESC';	
 		//$usertype = 'Admin';	
 		$data['teacher'] = $this->Teachers_model->view_record('');
-				
-		$this->load->view('Home/header');
+		$data['title'] = $_SESSION['TITLE'].''."- Teacher List";	
+		$this->load->view('Home/header',$data);
 		$this->load->view('Home/menu');
 		$this->load->view('Teachers/TeachersList',$data);
 		$this->load->view('Home/footer');	
@@ -278,7 +294,7 @@ class Teachers extends CI_Controller {
 			  </div>
 			  ');
 		
-		redirect(base_url().'index.php/Teachers/grid_view'); 
+		redirect(base_url().'Teachers/grid_view'); 
 	}
 	
 	public function single_view()

@@ -10,7 +10,7 @@
         <div class="box box-primary">
           <div class="box-header with-border">
             <h3 class="box-title">View Parent</h3>
-			<a class="btn btn-primary btn-sm pull-right" href="<?php echo base_url(); ?>index.php/Students/parent_grid_view">Back</a> </div>
+			<a class="btn btn-primary btn-sm pull-right" href="<?php echo base_url(); ?>Students/parent_grid_view">Back</a> </div>
           </div>
           <!-- /.box-header -->
 		  <div class="box-body" style="padding:0px">

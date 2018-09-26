@@ -3,18 +3,30 @@
 <div class="content-wrapper">
   <!-- Main content -->
   <section class="content">
-  <div class="row">
+	<div class="box">
     <!-- left column -->
-    <div class="col-sm-12">
-      <!-- general form elements -->
-      <div class="box box-primary">
+    <!-- general form elements -->
       <div class="box-header with-border">
-        <h3 class="box-title">Update Student</h3>
+        <h3 class="box-title"><i class="fa fa-address-card-o"></i> Update Student</h3>
       </div>
       <!-- /.box-header -->
+	</div><!-- div class="box" -->
+	  
+	  <div class="box">
+	
+    <div class="box-body">
+      <!-- general form elements -->
       <!-- form start -->
-      <form role="form" method="post" action="<?php echo base_url()?>index.php/Students/updateStudent/<?php echo $student_row['id'] ?>" enctype="multipart/form-data">
+      <form role="form" method="post" action="<?php echo base_url()?>Students/updateStudent/<?php echo $student_row['id'] ?>" enctype="multipart/form-data">
         <div class="box-body">
+		  <div class="panel panel-primary col-sm-12" style="padding:12px;">
+			<div class="form-group col-sm-4">
+             <label for="firstname">Admission number: </label>
+              <span style="color:#FF0000">*</span>
+               <input type="text" class="form-control" id="admission_no" name="admission_no" placeholder="Admission Number" 
+				value="<?php echo $student_row['admission_no']?>" onkeyup="isalpha(this)">
+                <?php echo form_error('admission_no','<div style="color:#FF0000;">','</div>'); ?> </div>
+			</div>
           <div class="col-sm-6">
             <div class="h4"><i class="fa fa-bandcamp" aria-hidden="true"></i> Personal Details</div>
             <div class="panel panel-primary col-sm-12"  style="padding:12px;">
@@ -138,9 +150,9 @@
                 </div>
               </div>
                <input type="hidden" class="form-control" id="username" name="username" placeholder="Username" 
-				value="<?php echo $student_row['username']?>" onkeyup="isalphanum(this)">
+				value="" onkeyup="isalphanum(this)">
 				<input type="hidden" class="form-control" id="password" name="password" placeholder="Password" 
-				  value="<?php echo $student_row['password']?>" 
+				  value="" 
 				  onkeyup="isalphanum(this)">
                 
               
@@ -280,9 +292,9 @@
                 </div>
               </div>
               <input type="hidden" class="form-control" id="pusername" name="pusername" placeholder="Username" 
-			  value="<?php echo $parent_row['username']?>" onkeyup="isalphanum(this)">
+			  value="" onkeyup="isalphanum(this)">
              <input type="hidden" class="form-control" id="ppassword" name="ppassword" placeholder="Password" 
-			 value="<?php echo set_value('ppassword')?>" onkeyup="isalphanum(this)">
+			 value="" onkeyup="isalphanum(this)">
 			  <div class="row">
               <div class="form-group col-sm-6">
                 <label for="educ">Qualification</label><span style="color:#FF0000">*</span>
@@ -327,10 +339,10 @@
         <div class="box-footer" align="right">
           <button type="submit" class="btn btn-primary">Save</button>
           <button type="reset" class="btn btn-primary">Reset</button>
-          <a class="btn btn-primary" href="<?php echo base_url(); ?>index.php/Students/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
+          <a class="btn btn-primary" href="<?php echo base_url(); ?>Students/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
       </form>
-    </div>
-  </div>
+    </div><!-- div class="box body" -->
+</div><!-- div class="box" -->
 </div>
 </section>
 </div>

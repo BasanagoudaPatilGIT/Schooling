@@ -2,19 +2,32 @@
 
 <div class="content-wrapper">
   <!-- Main content -->
-  <section class="content">
-  <div class="row">
-    <!-- left column -->
-    <div class="col-sm-12">
+  <section class="content" >
+  <div class="box">
+	<!-- left column -->
+	<div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-address-card-o"></i> Student Admission</h3>
+     </div><!-- div class="box-header with-border" -->
+  </div><!-- div class="box" -->
+
+  
+  <div class="box">
+	
+    <div class="box-body">
       <!-- general form elements -->
-      <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">Add Student</h3>
-      </div>
+      
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form" method="post" action="<?php echo base_url()?>index.php/Students/addstudent" enctype="multipart/form-data">
+      <form role="form" method="post" action="<?php echo base_url()?>Students/addstudent" enctype="multipart/form-data">
         <div class="box-body">
+			<div class="panel panel-primary col-sm-12" style="padding:12px;">
+				<div class="form-group col-sm-4">
+                  <label for="firstname">Admission number: </label>
+                  <span style="color:#FF0000">*</span>
+                  <input type="text" class="form-control" id="admission_no" name="admission_no" placeholder="Admission Number" 
+				  value="<?php echo set_value('admission_no')?>" onkeyup="isalpha(this)">
+                  <?php echo form_error('admission_no','<div style="color:#FF0000;">','</div>'); ?> </div>
+			</div>
           <div class="col-sm-6">
             <div class="h4"><i class="fa fa-bandcamp" aria-hidden="true"></i> Personal Details</div>
             <div class="panel panel-primary col-sm-12"  style="padding:12px;">
@@ -180,28 +193,34 @@
           <div class="h4"><i class="fa fa-building" aria-hidden="true"></i> School Details</div>
           <div class="panel panel-primary col-sm-12"  style="padding:12px;">
 		  <div class="row">
-              <div class="col-sm-6 form-group">
-                <label for="empcode">Roll Nummber</label>
-                <input type="text" class="form-control" id="rollnum" name="rollnum" placeholder="Roll Number" value="<?php echo set_value('rollnum')?>">
-				<?php echo form_error('rollnum','<div style="color:#FF0000;">','</div>'); ?>
-              </div>
-			  <div class="col-sm-6 form-group">
+				<div class="col-sm-6 form-group">
                 <label for="Class">Class</label><span style="color:#FF0000">*</span>
 				<?php $attributes = 'class = "form-control" id = "cbo_class" name = "cbo_class"';
                         echo form_dropdown('cbo_class',$cbo_class,set_value('cbo_class'), $attributes);
                    ?>
 				   <?php echo form_error('cbo_class','<div style="color:#FF0000;">','</div>'); ?>
               </div>
-            </div>
-            <div class="row">
+			  <div class="col-sm-6 form-group">
+                <label for="section">Section</label><span style="color:#FF0000">*</span>
+				<input type="text" class="form-control" id="section" name="section" placeholder="Section" value="<?php echo set_value('section')?>">
+				<?php echo form_error('section','<div style="color:#FF0000;">','</div>'); ?>
+              </div>
               <div class="col-sm-6 form-group">
+                <label for="empcode">Roll Nummber</label>
+                <input type="text" class="form-control" id="rollnum" name="rollnum" placeholder="Roll Number" value="<?php echo set_value('rollnum')?>">
+				<?php echo form_error('rollnum','<div style="color:#FF0000;">','</div>'); ?>
+              </div>
+			  <div class="col-sm-6 form-group">
                 <label for="Doj">Date of Join</label>
 				<span style="color:#FF0000">*</span>
-                <input type="text"  class="form-control datepicker" id="doj" name="doj" placeholder="Date of Join"  
+                <input type="text"  class="form-control datepicker" id="doj" name="doj" placeholder="Date of Join"
 				value="<?php echo set_value('doj')?>"><?php echo form_error('doj','<div style="color:#FF0000;">','</div>'); ?>
               </div>
+			</div>
+            <!--<div class="row">
               
-            </div>
+              
+            </div>-->
             
           </div>
         </div>
@@ -314,14 +333,17 @@
             </div>
         </div>
         <!-- /.box-body -->
+		</div>
         <div class="box-footer" align="right">
-          <button type="submit" class="btn btn-primary">Save</button>
-          <button type="reset" class="btn btn-primary">Reset</button>
-          <a class="btn btn-primary" href="<?php echo base_url(); ?>index.php/Students/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
-      </form>
-    </div>
-  </div>
-</div>
-</section>
+          <button type="submit" class="btn btn-sm btn-primary">Save</button>
+          <button type="reset" class="btn btn-sm btn-primary">Reset</button>
+          <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>Students/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> 
+		  </div>
+      
+    
+	</form>
+  </div><!-- div class="box body" -->
+</div><!-- div class="box" -->
+
 </div>
 <!-- /.content-wrapper -->

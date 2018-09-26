@@ -5,8 +5,8 @@
   <section class="content">
     <div class="box">
 	  <div class="box-header with-border">
-		<span class="h3">Parents List</span>
-        <a class="btn btn-primary btn-sm pull-right" href="<?php echo base_url(); ?>index.php/Students/addstudent"><i 
+		<h3 class="box-title"><i class="fa fa-address-card-o"></i> Parents List</h3>
+        <a class="btn btn-primary btn-sm pull-right" href="<?php echo base_url(); ?>Students/addstudent"><i 
 	class="fa fa-plus fa-fw"></i>Add New</a>
 	
       </div>
@@ -19,8 +19,7 @@
           <table id="example1" class="table table-bordered table-striped table-responsive table-hover">
             <thead>
               <tr>
-			  <th><input type="checkbox" name="all" id="all" value="all" /></th>
-                <th>Sl No</th>
+			    <th>Sl No</th>
 				<th>Picture</th>
                 <th>Name</th>
                 <th>Profession</th>
@@ -36,9 +35,7 @@
               <?php foreach ($parent as $row): ?>
               <?php $slno = $slno + 1; ?>
               <tr>
-			  <td align="center"><input type="checkbox" name="<?php echo $row['id'];?>" id="<?php echo $row['id'];?>" 
-			  value="<?php echo $row['id'];?>" /></td>
-                <td><?php echo $slno; ?></td>
+			    <td align="center"><?php echo $slno; ?></td>
 				<td><img class=" img-responsive img-sm"  
                 src="<?php echo base_url() ?>upload/profile/<?php echo $row['displaypicture']; ?>"/></td>
 				<td><a href="<?php echo base_url(); ?>index.php/Students/single_parent_view/<?php echo $row['id'] ?>"> 
@@ -54,8 +51,8 @@
                  <td class="text-center"><span class="label" style="background-color:red; padding:5px; 
 				 color:#fff"><?php echo $row['status'];?></span></td>
                 <?php }?>
-				<td align="center"><a class="btn btn-warning btn-sm" 
-				href="<?php echo base_url() ?>index.php/Students/updatestudent/<?php echo $row["id"] ?>" 
+				<td align="center"><a class="btn btn-sm btn-warning btn-sm" 
+				href="<?php echo base_url() ?>Students/updatestudent/<?php echo $row["id"] ?>" 
 				title="Click to Update this TestCase"><i class="fa fa-edit fa-fw fa-lg"></i></a>
                  <?php if(strtoupper($_SESSION['USER_TYPE']) == '' ){ ?>
                   <a class="btn btn-danger btn-sm" href="" 

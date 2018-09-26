@@ -13,7 +13,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form role="form" method="post" action="<?php echo base_url()?>index.php/Teachers/updateteacher/<?php echo $teacher_row['id'] ?>" enctype="multipart/form-data">
+          <form role="form" method="post" action="<?php echo base_url()?>Teachers/updateteacher/<?php echo $teacher_row['id'] ?>" enctype="multipart/form-data">
             <div class="box-body">
               <div class="col-sm-6">
                 <div class="h4"><i class="fa fa-bandcamp" aria-hidden="true"></i> Personal Details</div>
@@ -78,7 +78,8 @@
                       <label for="Zipcode">Zipcode</label>
                       <span style="color:#FF0000">*</span>
                       <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Zipcode" value="<?php echo $teacher_row['zipcode']?>">
-                    </div>
+						<?php echo form_error('zipcode','<div style="color:#FF0000;">','</div>'); ?>
+					</div>
                   </div>
                   <div class="row">
                     <div class="form-group col-sm-6">
@@ -93,8 +94,8 @@
                    ?>
                     </div>
                   </div>
-			<input type="hidden" class="form-control" id="username" name="username" placeholder="Username" value="<?php echo $teacher_row['username']?>">
-             <input type="hidden" class="form-control" id="password" name="password" placeholder="Password" value="<?php echo $teacher_row['password']?>">
+			<input type="hidden" class="form-control" id="username" name="username" placeholder="Username" value="">
+             <input type="hidden" class="form-control" id="password" name="password" placeholder="Password" value="">
                   <div class="form-group">
                     <label for="educ">Qualification</label>
                     <span style="color:#FF0000">*</span>
@@ -180,7 +181,7 @@
             <div class="box-footer" align="right">
               <button type="submit" class="btn btn-primary">Save</button>
               <button type="reset" class="btn btn-primary">Reset</button>
-              <a class="btn btn-primary" href="<?php echo base_url(); ?>index.php/Teachers/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
+              <a class="btn btn-primary" href="<?php echo base_url(); ?>Teachers/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
           </form>
         </div>
       </div>

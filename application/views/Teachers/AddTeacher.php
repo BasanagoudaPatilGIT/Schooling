@@ -3,17 +3,23 @@
 <div class="content-wrapper">
   <!-- Main content -->
   <section class="content">
-  <div class="row">
+	<div class="box">
     <!-- left column -->
-    <div class="col-sm-12">
-      <!-- general form elements -->
-      <div class="box box-primary">
+	<!-- general form elements -->
       <div class="box-header with-border">
-        <h3 class="box-title">Add Teacher</h3>
+        <h3 class="box-title"><i class="fa fa-address-card-o"></i> Add Teacher</h3>
       </div>
+	</div><!-- class="box" -->
+	
+	
+	 <div class="box">
+	
+    <div class="box-body">
+      <!-- general form elements -->
+	  
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form" method="post" action="<?php echo base_url()?>index.php/Teachers/addteacher" enctype="multipart/form-data">
+      <form role="form" method="post" action="<?php echo base_url()?>Teachers/addteacher" enctype="multipart/form-data">
         <div class="box-body">
           <div class="col-sm-6">
             <div class="h4"><i class="fa fa-bandcamp" aria-hidden="true"></i> Personal Details</div>
@@ -83,7 +89,8 @@
                   <label for="Zipcode">Zipcode</label>
 				  <span style="color:#FF0000">*</span>
                   <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Zipcode" value="<?php echo set_value('zipcode')?>">
-                </div>
+                  <?php echo form_error('zipcode','<div style="color:#FF0000;">','</div>'); ?>
+				</div>
               </div>
               <div class="row">
                 <div class="form-group col-sm-6">
@@ -169,13 +176,12 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer" align="right">
-          <button type="submit" class="btn btn-primary">Save</button>
-          <button type="reset" class="btn btn-primary">Reset</button>
-          <a class="btn btn-primary" href="<?php echo base_url(); ?>index.php/Teachers/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
+          <button type="submit" class="btn btn-sm btn-primary">Save</button>
+          <button type="reset" class="btn btn-sm btn-primary">Reset</button>
+          <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>Teachers/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
       </form>
-    </div>
-  </div>
-</div>
+    <!-- div class="box body" -->
+</div><!-- div class="box" -->
 </section>
 </div>
 <!-- /.content-wrapper -->

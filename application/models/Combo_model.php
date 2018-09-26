@@ -47,15 +47,11 @@ class Combo_model extends CI_Model
     }
 	
 	function cbo_class()
-    { 
-        $this->db->select('id');
-        $this->db->select('class_name');
-        $this->db->from('tab_class');
-		$this->db->order_by('id', 'ASC');
-        $query = $this->db->get();
+    {
+		$sql = "SELECT id,class_name FROM tab_class WHERE count <= class_capacity";		
+        $query = $this->db->query($sql);
         $result = $query->result();
-
-        $id = array('');
+		$id = array('');
         $value = array('-SELECT-');
 
         for ($i = 0; $i < count($result); $i++)
@@ -414,6 +410,26 @@ class Combo_model extends CI_Model
         {
             array_push($id, $result[$i]->id);
             array_push($value, $result[$i]->flat_no);
+        }
+        return $result_combo = array_combine($id, $value);
+    }
+	
+	function cbo_rollnum()
+    { 
+        $this->db->select('id');
+        $this->db->select('roll_num');
+        $this->db->from('tab_students');
+		$this->db->order_by('roll_num', 'ASC');
+        $query = $this->db->get();
+        $result = $query->result();
+
+        $id = array('');
+        $value = array('-SELECT-');
+
+        for ($i = 0; $i < count($result); $i++)
+        {
+            array_push($id, $result[$i]->id);
+            array_push($value, $result[$i]->roll_num);
         }
         return $result_combo = array_combine($id, $value);
     }

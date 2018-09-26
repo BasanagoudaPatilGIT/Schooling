@@ -32,8 +32,10 @@ class Students extends CI_Controller {
 		$data['cbo_country'] = $this->Combo_model->cbo_country();
 		$data['percbo_country'] = $this->Combo_model->cbo_country();
 		$data['pcbo_blood_group'] = $this->Combo_model->cbo_blood_group();
+		//$data['cbo_rollnum'] = $this->Combo_model->cbo_rollnum();
 	
 	    // Field Validation
+		$this->form_validation->set_rules('admission_no','Admission Number','required');
 		$this->form_validation->set_rules('firstname','First Name','required');
 		$this->form_validation->set_rules('middlename','Middle Name','required');
 		$this->form_validation->set_rules('lastname','Last Name','required');
@@ -112,6 +114,7 @@ class Students extends CI_Controller {
 			(
 				'status'=>$std_status,
 				'user_type'=>3,
+				'admission_no' => $this->input->post('admission_no'),
 				'first_name'=>$std_first_name,
 				'middle_name'=>$std_middle_name,
 				'last_name'=>$std_last_name,
@@ -235,7 +238,7 @@ class Students extends CI_Controller {
 			$this->User_model->add_record($data);
 			echo '<script>alert("Record Added Successfully.");</script>';
 			
-			redirect(base_url().'index.php/Students/grid_view'); 
+			redirect(base_url().'Students/grid_view'); 
 
 		}
 		
@@ -266,6 +269,7 @@ class Students extends CI_Controller {
 		$data['percbo_blood_group'] = $this->Combo_model->cbo_blood_group();
 	
 	    // Field Validation
+		$this->form_validation->set_rules('admission_no','Admission Number','required');
 		$this->form_validation->set_rules('firstname','First Name','required');
 		$this->form_validation->set_rules('middlename','Middle Name','required');
 		$this->form_validation->set_rules('lastname','Last Name','required');
@@ -294,10 +298,11 @@ class Students extends CI_Controller {
 		$this->form_validation->set_rules('pqual','Qualification','required');
 		$this->form_validation->set_rules('profession','Profession','required');
 		
+		$data['title'] = $_SESSION['TITLE'].''."- Student list";
 		
 		if(($this->form_validation->run())==false)
 		{
-			$this->load->view('Home/header');
+			$this->load->view('Home/header',$data);
 			$this->load->view('Home/menu');
 			$this->load->view('Students/UpdateStudent',$data);
 			$this->load->view('Home/footer');
@@ -350,6 +355,7 @@ class Students extends CI_Controller {
 		$data =array
 			(
 				'user_type'=>'Student',
+				'admission_no' => $this->input->post('admission_no'),
 				'first_name'=>$this->input->post('firstname'),
 				'middle_name'=>$this->input->post('middlename'),
 				'last_name'=>$this->input->post('lastname'),
@@ -366,8 +372,8 @@ class Students extends CI_Controller {
 				'per_zipcode'=>$this->input->post('perzipcode'),
 				'phone'=>$this->input->post('phone'),
 				'blood_group_id'=>$this->input->post('cbo_blood_group'),
-				'username'=>$this->input->post('username'),
-				'password'=>$this->input->post('password'),
+				//'username'=>$this->input->post('username'),
+				//'password'=>$this->input->post('password'),
 				'date_of_joining'=>$this->input->post('doj'),
 				'roll_num'=>$this->input->post('rollnum'),
 				'class_id'=>$this->input->post('cbo_class'),
@@ -388,8 +394,8 @@ class Students extends CI_Controller {
 				'gender_id'=>$this->input->post('pcbo_sex'),
 				'phone'=>$this->input->post('pphone'),
 				'blood_group_id'=>$this->input->post('percbo_blood_group'),
-				'username'=>$this->input->post('pusername'),
-				'password'=>$this->input->post('ppassword'),
+				//'username'=>$this->input->post('pusername'),
+				//'password'=>$this->input->post('ppassword'),
 				'qualification'=>$this->input->post('pqual'),
 				'profession'=>$this->input->post('profession'),
 				'displaypicture'=>$pdisplaypicture,
@@ -422,13 +428,13 @@ class Students extends CI_Controller {
 	
 	public function parent_grid_view()
 	{
-		
+		$data['title'] = $_SESSION['TITLE'].''."- Student list";
 		//GET DATA FROM TABLE
 		$order_by = 'DESC';	
 		//$usertype = 'Admin';	
 		$data['parent'] = $this->Students_model->view_parent_record('');
 				
-		$this->load->view('Home/header');
+		$this->load->view('Home/header',$data);
 		$this->load->view('Home/menu');
 		$this->load->view('Students/ParentsList',$data);
 		$this->load->view('Home/footer');	
