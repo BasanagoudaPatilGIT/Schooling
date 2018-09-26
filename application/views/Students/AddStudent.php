@@ -20,14 +20,6 @@
       <!-- form start -->
       <form role="form" method="post" action="<?php echo base_url()?>Students/addstudent" enctype="multipart/form-data">
         <div class="box-body">
-			<div class="panel panel-primary col-sm-12" style="padding:12px;">
-				<div class="form-group col-sm-4">
-                  <label for="firstname">Admission number: </label>
-                  <span style="color:#FF0000">*</span>
-                  <input type="text" class="form-control" id="admission_no" name="admission_no" placeholder="Admission Number" 
-				  value="<?php echo set_value('admission_no')?>" onkeyup="isalpha(this)">
-                  <?php echo form_error('admission_no','<div style="color:#FF0000;">','</div>'); ?> </div>
-			</div>
           <div class="col-sm-6">
             <div class="h4"><i class="fa fa-bandcamp" aria-hidden="true"></i> Personal Details</div>
             <div class="panel panel-primary col-sm-12"  style="padding:12px;">
@@ -193,6 +185,12 @@
           <div class="h4"><i class="fa fa-building" aria-hidden="true"></i> School Details</div>
           <div class="panel panel-primary col-sm-12"  style="padding:12px;">
 		  <div class="row">
+		  <div class="form-group col-sm-12">
+                  <label for="firstname">Admission number: </label>
+                  <span style="color:#FF0000">*</span>
+                  <input type="text" class="form-control" id="admission_no" name="admission_no" placeholder="Admission Number"  readonly=""
+				  value="<?php echo set_value('admission_no')?>" onkeyup="isalpha(this)">
+                  <?php echo form_error('admission_no','<div style="color:#FF0000;">','</div>'); ?> </div>
 				<div class="col-sm-6 form-group">
                 <label for="Class">Class</label><span style="color:#FF0000">*</span>
 				<?php $attributes = 'class = "form-control" id = "cbo_class" name = "cbo_class"';

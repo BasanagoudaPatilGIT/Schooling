@@ -14,6 +14,7 @@ class User extends CI_Controller {
 		$this->load->model('User_model');
 		$this->load->model('Combo_model');	
 		$this->load->library('encryption');
+		$this->load->model('Dashboard_model');
 	}
 	
 	public function index()
@@ -41,9 +42,10 @@ class User extends CI_Controller {
 		
 		if(($this->form_validation->run())==false)
 		{
-		$data['title'] = "HealthCare - Add Users";
+		$data['title'] = $_SESSION['TITLE'].''."- Add Staff";
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
 		$this->load->view('Home/header',$data);
-		$this->load->view('Home/menu');
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Users/adduser',$data);
 		$this->load->view('Home/footer');
 		//print_r("hi");
@@ -128,9 +130,10 @@ class User extends CI_Controller {
 		
 		if(($this->form_validation->run())==false)
 		{
-		$data['title'] = "HealthCare - Update Users";
+		$data['title'] = $_SESSION['TITLE'].''."- Update Staff";
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
 		$this->load->view('Home/header',$data);
-		$this->load->view('Home/menu');
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Users/updateuser',$data);
 		$this->load->view('Home/footer');
 		}
@@ -194,9 +197,10 @@ class User extends CI_Controller {
 		//$usertype = 'Admin';	
 		$data['user'] = $this->User_model->view_record('');
 		
-		$data['title'] = "HealthCare - Users List";
+		$data['title'] = $_SESSION['TITLE'].''."- Staff List";
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
 		$this->load->view('Home/header',$data);
-		$this->load->view('Home/menu');
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Users/userlist',$data);
 		$this->load->view('Home/footer');	
 	}
@@ -235,9 +239,10 @@ class User extends CI_Controller {
 		//GET DATA FROM TABLE
 		$data['user_row'] = $this->User_model->get_record_by_id($id);
 		
-		$data['title'] = "HealthCare - view Users";
+		$data['title'] = $_SESSION['TITLE'].''."- Staff view";
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
 		$this->load->view('Home/header',$data);
-		$this->load->view('Home/menu');
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Users/userview',$data);
 		$this->load->view('Home/footer');	
 	}

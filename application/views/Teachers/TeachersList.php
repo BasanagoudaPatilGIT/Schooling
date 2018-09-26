@@ -5,7 +5,8 @@
   <section class="content">
     <div class="box">
 	  <div class="box-header with-border">
-		<h3 class="box-title"><i class="fa fa-address-card-o"></i> Teachers List</h3>
+		<h3 class="box-title"><i class="fa fa-user-secret"></i> Teachers List</h3>
+		
         <a class="btn btn-primary btn-sm pull-right" href="<?php echo base_url(); ?>Teachers/addteacher"><i 
 	class="fa fa-plus fa-fw"></i>Add New</a>
 	

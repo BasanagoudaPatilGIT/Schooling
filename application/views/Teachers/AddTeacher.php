@@ -7,7 +7,7 @@
     <!-- left column -->
 	<!-- general form elements -->
       <div class="box-header with-border">
-        <h3 class="box-title"><i class="fa fa-address-card-o"></i> Add Teacher</h3>
+        <h3 class="box-title"><i class="fa fa-user-secret"></i> Add Teacher</h3>
       </div>
 	</div><!-- class="box" -->
 	

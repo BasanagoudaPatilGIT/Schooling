@@ -14,6 +14,7 @@ class Subjects extends CI_Controller {
 		$this->load->model('Subjects_model');
 		$this->load->model('Combo_model');
 		$this->load->model('Class_model');
+		$this->load->model('Dashboard_model');
 	}
 	
 	public function index()
@@ -34,8 +35,10 @@ class Subjects extends CI_Controller {
 		
 		if(($this->form_validation->run())==false)
 		{
-			$this->load->view('Home/header');
-			$this->load->view('Home/menu');
+			$data['class_list'] = $this->Dashboard_model->get_class_record();
+			$data['title'] = $_SESSION['TITLE'].''."- Add Subject";
+			$this->load->view('Home/header',$data);
+			$this->load->view('Home/menu',$data);
 			$this->load->view('Subjects/AddSubject',$data);
 			$this->load->view('Home/footer');
 		}
@@ -85,9 +88,10 @@ class Subjects extends CI_Controller {
 		
 		if(($this->form_validation->run())==false)
 		{
-		echo('hi');
-			$this->load->view('Home/header');
-			$this->load->view('Home/menu');
+			$data['class_list'] = $this->Dashboard_model->get_class_record();
+			$data['title'] = $_SESSION['TITLE'].''."- Update Subject";
+			$this->load->view('Home/header',$data);
+			$this->load->view('Home/menu',$data);
 			$this->load->view('Subjects/UpdateSubject',$data);
 			$this->load->view('Home/footer');
 		}
@@ -121,8 +125,10 @@ class Subjects extends CI_Controller {
 		//$usertype = 'Admin';	
 		$data['subject'] = $this->Subjects_model->view_record('');
 				
-		$this->load->view('Home/header');
-		$this->load->view('Home/menu');
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
+		$data['title'] = $_SESSION['TITLE'].''."- Subject List";
+		$this->load->view('Home/header',$data);
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Subjects/SubjectList',$data);
 		$this->load->view('Home/footer');	
 	}
@@ -160,9 +166,10 @@ class Subjects extends CI_Controller {
 		
 		//GET DATA FROM TABLE
 		$data['subject_row'] = $this->Subject_model->get_single_view($id);
-		
-		$this->load->view('Home/header');
-		$this->load->view('Home/menu');
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
+		$data['title'] = $_SESSION['TITLE'].''."- Subject view";
+		$this->load->view('Home/header',$data);
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Subjects/Subject_view',$data);
 		$this->load->view('Home/footer');	
 	}

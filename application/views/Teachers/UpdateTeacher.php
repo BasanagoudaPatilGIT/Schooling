@@ -3,16 +3,22 @@
 <div class="content-wrapper">
   <!-- Main content -->
   <section class="content">
-    <div class="row">
-      <!-- left column -->
-      <div class="col-sm-12">
-        <!-- general form elements -->
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Update Teacher</h3>
-          </div>
-          <!-- /.box-header -->
-          <!-- form start -->
+	<div class="box">
+    <!-- left column -->
+	<!-- general form elements -->
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-user-secret"></i> Update Teacher</h3>
+      </div>
+	</div><!-- class="box" -->
+	
+	
+	 <div class="box">
+	
+    <div class="box-body">
+      <!-- general form elements -->
+	  
+      <!-- /.box-header -->
+      <!-- form start -->
           <form role="form" method="post" action="<?php echo base_url()?>Teachers/updateteacher/<?php echo $teacher_row['id'] ?>" enctype="multipart/form-data">
             <div class="box-body">
               <div class="col-sm-6">
@@ -169,9 +175,7 @@
 							$attributes = 'class = "form-control" id = "cbo_status"';
 							echo form_dropdown('cbo_status',$cbo_status, $teacher_row['status'], $attributes);
 							   ?>
-							   
-							 
-                  </div>
+				</div>
 				  </div>
                   <?php }?>
                 </div>
@@ -179,13 +183,12 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer" align="right">
-              <button type="submit" class="btn btn-primary">Save</button>
-              <button type="reset" class="btn btn-primary">Reset</button>
-              <a class="btn btn-primary" href="<?php echo base_url(); ?>Teachers/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
+              <button type="submit" class="btn btn-sm btn-primary">Save</button>
+              <button type="reset" class="btn btn-sm  btn-primary">Reset</button>
+              <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>Teachers/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
           </form>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- div class="box body" -->
+</div><!-- div class="box" -->
+</section>
 </div>
 <!-- /.content-wrapper -->

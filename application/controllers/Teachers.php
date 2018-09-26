@@ -14,6 +14,7 @@ class Teachers extends CI_Controller {
 		$this->load->model('Teachers_model');
 		$this->load->model('User_model');
 		$this->load->model('Combo_model');
+		$this->load->model('Dashboard_model');
 	}
 	
 	public function index()
@@ -45,12 +46,13 @@ class Teachers extends CI_Controller {
 		$this->form_validation->set_rules('phone','Phone Number','required');
 		$this->form_validation->set_rules('zipcode','Zipcode','required|max_length[6]|min_length[6]');
 		
-		$data['title'] = $_SESSION['TITLE'].''."- Add Teacher";
 		
 		if(($this->form_validation->run())==false)
 		{
+			$data['class_list'] = $this->Dashboard_model->get_class_record();
+			$data['title'] = $_SESSION['TITLE'].''."- Add Teacher";
 			$this->load->view('Home/header',$data);
-			$this->load->view('Home/menu');
+			$this->load->view('Home/menu',$data);
 			$this->load->view('Teachers/AddTeacher',$data);
 			$this->load->view('Home/footer');
 		}
@@ -185,8 +187,10 @@ class Teachers extends CI_Controller {
 		
 		if(($this->form_validation->run())==false)
 		{
+			$data['class_list'] = $this->Dashboard_model->get_class_record();
+			$data['title'] = $_SESSION['TITLE'].''."- Update Teacher";
 			$this->load->view('Home/header',$data);
-			$this->load->view('Home/menu');
+			$this->load->view('Home/menu',$data);
 			$this->load->view('Teachers/UpdateTeacher',$data);
 			$this->load->view('Home/footer');
 		}
@@ -267,10 +271,12 @@ class Teachers extends CI_Controller {
 		//GET DATA FROM TABLE
 		$order_by = 'DESC';	
 		//$usertype = 'Admin';	
+		
 		$data['teacher'] = $this->Teachers_model->view_record('');
-		$data['title'] = $_SESSION['TITLE'].''."- Teacher List";	
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
+		$data['title'] = $_SESSION['TITLE'].''."- Teacher List";
 		$this->load->view('Home/header',$data);
-		$this->load->view('Home/menu');
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Teachers/TeachersList',$data);
 		$this->load->view('Home/footer');	
 	}
@@ -309,8 +315,10 @@ class Teachers extends CI_Controller {
 		//GET DATA FROM TABLE
 		$data['teacher_row'] = $this->Teachers_model->get_single_view($id);
 		
-		$this->load->view('Home/header');
-		$this->load->view('Home/menu');
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
+		$data['title'] = $_SESSION['TITLE'].''."- Teacher view";
+		$this->load->view('Home/header',$data);
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Teachers/Teacher_view',$data);
 		$this->load->view('Home/footer');	
 	}
