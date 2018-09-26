@@ -3,22 +3,19 @@
 <div class="content-wrapper">
   <!-- Main content -->
   <section class="content">
-  <div class="row">
+  <div class="box">
+	<!-- left column -->
+	<div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-th"></i> Update Class</h3>
+     </div><!-- div class="box-header with-border" -->
+  </div><!-- div class="box" -->
+   <div class="box">
     <!-- left column -->
-    <div class="col-sm-12">
-      <!-- general form elements -->
-      <div class="box box-primary">
-      <div class="box-header with-border">
-        <h3 class="box-title">Add Class Information</h3>
-      </div>
+    <div class="box-body">
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form" method="post" action="<?php echo base_url()?>index.php/Classes/updateclass/<?php echo $class_row['id'] ?>" 
-	  enctype="multipart/form-data">
+      <form method="post" action="<?php echo base_url()?>Classes/updateclass/<?php echo $class_row['id'] ?>" enctype="multipart/form-data">
         <div class="box-body">
-          <div class="col-sm-12">
-            <div class="h4"><i class="fa fa-bandcamp" aria-hidden="true"></i> Personal Details</div>
-            <div class="panel panel-primary col-sm-12"  style="padding:12px;">
               <div class="row">
                 <div class="form-group col-sm-4">
                   <label for="classname">Class Name</label>
@@ -27,11 +24,12 @@
 				  value="<?php echo $class_row['class_name'] ?>" onkeyup="isalphanum(this)">
                   <?php echo form_error('classname','<div style="color:#FF0000;">','</div>'); ?> </div>
                 <div class="col-sm-4 form-group">
-                  <label for="classnum">Class Number</label>
+                  <label for="classnum">Class Section</label>
                   <span style="color:#FF0000">*</span>
-                  <input type="text" class="form-control" id="classnum" name="classnum" placeholder="Class Number" 
-				  value="<?php echo $class_row['class_number'] ?>" onkeyup="isalphanum(this)">
+                  <input type="text" class="form-control" id="classsec" name="classsec" placeholder="Class Section" 
+				  value="<?php echo $class_row['class_section'] ?>" onkeyup="isalphanum(this)">
 				  </div>
+				
                 <div class="col-sm-4 form-group">
                   <label for="capacity">Class Capacity</label>
                   <span style="color:#FF0000">*</span>
@@ -69,38 +67,22 @@
                   <input type="text" class="form-control" id="location" name="location" placeholder="Class Location" 
 				  value="<?php echo $class_row['class_location'] ?>" onkeyup="">
                 </div>
-				 <?php if(strtoupper($_SESSION['USER_TYPE']) == '' ){?>
-				  <div class="row">
-                  <div class="col-sm-4 form-group">
-                    <label for="Status">Status </label>
-                    <?php
-							$cbo_status = 
-							 array(   
-							 			'Active' => 'Active',
-									    'InActive' =>'InActive'
-									  
-									);
-							$attributes = 'class = "form-control" id = "cbo_status"';
-							echo form_dropdown('cbo_status',$cbo_status, $class_row['status'], $attributes);
-							   ?>
-							   
-							 
-                  </div>
+				<div class="col-sm-4 form-group">
+                  <label for="classnum">Class Room Number</label>
+                  <span style="color:#FF0000">*</span>
+                  <input type="text" class="form-control" id="classnum" name="classnum" placeholder="Class Room Number" 
+				  value="<?php echo set_value('classnum')?>" onkeyup="isalphanum(this)">
 				  </div>
-                  <?php }?>
-			  </div>
-			  </div>
 			  </div>
 			  </div>
 			  
              
         <!-- /.box-body -->
         <div class="box-footer" align="right">
-          <button type="submit" class="btn btn-primary">Save</button>
-          <button type="reset" class="btn btn-primary">Reset</button>
-          <a class="btn btn-primary" href="<?php echo base_url(); ?>index.php/Classes/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
+          <button type="submit" class="btn btn-sm btn-primary">Save</button>
+          <button type="reset" class="btn btn-sm btn-primary">Reset</button>
+          <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>Classes/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
       </form>
-    </div>
   </div>
 </div>
 </section>
