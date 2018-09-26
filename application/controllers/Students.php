@@ -15,6 +15,7 @@ class Students extends CI_Controller {
 		$this->load->model('Students_model');
 		$this->load->model('Combo_model');
 		$this->load->model('User_model');
+		$this->load->model('Dashboard_model');
 	}
 	
 	public function index()
@@ -70,11 +71,12 @@ class Students extends CI_Controller {
 		$this->form_validation->set_rules('pqual','Qualification','required');
 		$this->form_validation->set_rules('profession','Profession','required');
 		
-		$data['title'] = $_SESSION['TITLE'].''."- Add Student";
 		if(($this->form_validation->run())==false)
 		{
+			$data['title'] = $_SESSION['TITLE'].''."- Add Student";
+			$data['class_list'] = $this->Dashboard_model->get_class_record();
 			$this->load->view('Home/header',$data);
-			$this->load->view('Home/menu');
+			$this->load->view('Home/menu',$data);
 			$this->load->view('Students/AddStudent',$data);
 			$this->load->view('Home/footer');
 		}
@@ -298,12 +300,13 @@ class Students extends CI_Controller {
 		$this->form_validation->set_rules('pqual','Qualification','required');
 		$this->form_validation->set_rules('profession','Profession','required');
 		
-		$data['title'] = $_SESSION['TITLE'].''."- Student list";
 		
 		if(($this->form_validation->run())==false)
 		{
+			$data['title'] = $_SESSION['TITLE'].''."- Update Student";
+			$data['class_list'] = $this->Dashboard_model->get_class_record();
 			$this->load->view('Home/header',$data);
-			$this->load->view('Home/menu');
+			$this->load->view('Home/menu',$data);
 			$this->load->view('Students/UpdateStudent',$data);
 			$this->load->view('Home/footer');
 		}
@@ -414,14 +417,22 @@ class Students extends CI_Controller {
 	
 	public function grid_view()
 	{
-			
+		$id = $this->uri->segment(3);
+	
+		if ($id==0)
+		{
+			$this->index();			
+		}	
 		$data['title'] = $_SESSION['TITLE'].''."- Student list";
 		//GET DATA FROM TABLE
 		$order_by = 'DESC';	
 		//$usertype = 'Admin';	
-		$data['student'] = $this->Students_model->view_record('');
+		$data['student'] = $this->Students_model->view_record('',$id);
+		$data['title'] = $_SESSION['TITLE'].''."- Student List";
+		$data['selected_class'] = $this->Dashboard_model->get_selected_class_record('',$id);
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
 		$this->load->view('Home/header',$data);
-		$this->load->view('Home/menu');
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Students/StudentsList',$data);
 		$this->load->view('Home/footer');	
 	}
@@ -475,8 +486,10 @@ class Students extends CI_Controller {
 		//GET DATA FROM TABLE
 		$data['student_row'] = $this->Students_model->get_single_view($id);
 		$data['parent_row'] = $this->Students_model->get_parent_single_view($id);
-		$this->load->view('Home/header');
-		$this->load->view('Home/menu');
+		$data['title'] = $_SESSION['TITLE'].''."- Student List";
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
+		$this->load->view('Home/header',$data);
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Students/student_view',$data);
 		$this->load->view('Home/footer');	
 	}
@@ -493,8 +506,10 @@ class Students extends CI_Controller {
 		//GET DATA FROM TABLE
 		$data['student_row'] = $this->Students_model->get_single_view($id);
 		$data['parent_row'] = $this->Students_model->get_parent_single_view($id);
-		$this->load->view('Home/header');
-		$this->load->view('Home/menu');
+		$data['title'] = $_SESSION['TITLE'].''."- Student List";
+		$data['class_list'] = $this->Dashboard_model->get_class_record();
+		$this->load->view('Home/header',$data);
+		$this->load->view('Home/menu',$data);
 		$this->load->view('Students/parent_view',$data);
 		$this->load->view('Home/footer');	
 	}

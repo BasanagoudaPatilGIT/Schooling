@@ -23,6 +23,7 @@
 				<th>Class Name</th>
 				<th>Class Section</th>
                 <th>Class Teacher</th>
+                <th>Class Location</th>
 				<th>Class Room Number</th>
                 <th align="center">Actions</th>
               </tr>
@@ -33,11 +34,12 @@
               <?php $slno = $slno + 1; ?>
               <tr>
 			    <td><?php echo $slno; ?></td>
-				<td><a href="<?php echo base_url() ?>index.php/Classes/single_view/<?php echo $row["id"] ?>" title="Click to view class details"><?php echo $row['class_name'];?></a></td>
+				<td><a href="<?php echo base_url() ?>Classes/single_view/<?php echo $row["id"] ?>" title="Click to view class details"><?php echo $row['class_name'];?></a></td>
 				
 				<td><?php echo $row['class_section'];?></td>
 				<td><?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></td>
 				
+				<td><?php echo $row['class_location'];?></td>
 				<td><?php echo $row['class_number'];?></td>
 				<td align="center" width="100px"><a class="btn btn-warning btn-sm" 
 				href="<?php echo base_url() ?>Classes/updateclass/<?php echo $row["id"] ?>" 

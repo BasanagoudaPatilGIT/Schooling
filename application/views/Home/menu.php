@@ -21,14 +21,15 @@
 		<li><a href="<?php echo base_url()?>Events/grid_view"><i class="fa fa-bus"></i> <span>Transportation</span></a></li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Admission</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+            <i class="fa fa-address-card-o"></i>
+            <span>Student Management</span>
+            
           </a>
           <ul class="treeview-menu">
-            </ul>
+		  <?php foreach ($class_list as $row): ?>
+		  <li><a href="<?php echo base_url()?>Students/grid_view/<?php echo $row['id']?>"><i class="fa fa-address-card-o"></i> <span><?php echo $row['class_name']; echo " - "; echo $row['class_section']?></span></a></li>
+           <?php endforeach ?>
+			</ul>
         </li>
        </ul>
     </section>

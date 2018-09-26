@@ -39,18 +39,6 @@
               </div>
 			  
               <div class="row">
-                <div class="form-group col-sm-4">
-                  <label for="startdate">Class Starting On:</label>
-				  <span style="color:#FF0000">*</span>
-                  <input type="text" class="form-control datepicker" id="startdate" name="startdate" placeholder="yyyy-mm-dd" 
-				  value="<?php echo $class_row['class_starting_date'] ?>"><?php echo form_error('startdate','<div style="color:#FF0000;">','</div>'); ?>
-				</div>
-                <div class="form-group col-sm-4">
-                  <label for="enddate">Class Ending On:</label>
-				  <span style="color:#FF0000">*</span>
-                  <input type="text" class="form-control datepicker" id="enddate" name="enddate" placeholder="yyyy-mm-dd"
-				  value="<?php echo $class_row['class_ending_date'] ?>"><?php echo form_error('enddate','<div style="color:#FF0000;">','</div>'); ?>
-                </div>
 				 <div class="form-group col-sm-4">
                   <label for="teacher">Class Teacher <small>(incharge)</small>:</label>
 				  <span style="color:#FF0000">*</span>
@@ -59,8 +47,6 @@
                    ?>
 				  <?php echo form_error('cbo_teacher','<div style="color:#FF0000;">','</div>'); ?>
                 </div>
-              </div>
-			  <div class="row">
                 <div class="form-group col-sm-4">
                   <label for="loation">Class Location</label>
                   <span style="color:#FF0000">*</span>
