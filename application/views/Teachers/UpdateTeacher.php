@@ -139,7 +139,7 @@
                   <div class="row">
                     <div class="col-sm-6 form-group">
                       <label for="empcode">Employee Code</label>
-                      <input type="text" class="form-control" id="EmpCode" name="EmpCode" placeholder="Employee Code" disabled="disabled" title="Auto generated value Not editable" value="<?php echo $teacher_row['emp_code'] ?>">
+                      <input type="text" class="form-control" id="EmpCode" name="EmpCode" placeholder="Employee Code" readonly="" title="Auto generated value Not editable" value="<?php echo $teacher_row['emp_code'] ?>">
                     </div>
                     <div class="col-sm-6 form-group">
                       <label for="position">Current Position</label>
@@ -154,14 +154,14 @@
                       <input type="text" class="form-control" id="doj" name="doj" placeholder="Date of Join"  
 				value="<?php echo $teacher_row['date_of_joining'] ?>" readonly="" title="You can't modify this field" >
                     </div>
-                    <?php if(strtoupper($_SESSION['USER_TYPE']) == '' ){ ?>
+                    <?php if(strtoupper($_SESSION['USER_TYPE']) == 'ADMIN' ){ ?>
                     <div class="col-sm-6 form-group">
                       <label for="Dol">Date of Releaving</label>
                       <input type="text" class="form-control datepicker" id="dol" name="dol" placeholder="Date of Leave"  
 				value="<?php echo set_value('dol')?> " ></div>
                     <?php } ?>
                   </div>
-                  <?php if(strtoupper($_SESSION['USER_TYPE']) == '' ){?>
+                  <?php if(strtoupper($_SESSION['USER_TYPE']) == 'ADMIN' ){?>
 				  <div class="row">
                   <div class="col-sm-6 form-group">
                     <label for="Status">Status </label>

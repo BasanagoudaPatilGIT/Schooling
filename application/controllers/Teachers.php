@@ -67,7 +67,7 @@ class Teachers extends CI_Controller {
 			
 			$this->load->library('upload', $config);
 			
-			//$displaypicture ='Capture.jpg';
+			$displaypicture ='Capture.jpg';
 			//echo($displaypicture);
 			if( !$this->upload->do_upload('displaypicture') ){
 				print_r($this->upload->display_errors());
@@ -145,7 +145,7 @@ class Teachers extends CI_Controller {
 			$this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon fa fa-times"></i></button>
 				
-				<i class="icon fa fa-trash-o"></i> Record Added Successfully.
+				<i class="icon fa fa-check"></i> Record Added Successfully.
 			  </div>
 			  ');
 			redirect(base_url().'Teachers/grid_view'); 
@@ -216,7 +216,7 @@ class Teachers extends CI_Controller {
 				$displaypicture = $_FILES['displaypicture']['name'];
 			}
 			
-			if(strtoupper($_SESSION['USER_TYPE']) == '' )
+			if(strtoupper($_SESSION['USER_TYPE']) == 'ADMIN' )
 			{
 			$data =array(	
 						'status'=>$this->input->post('cbo_status'),
@@ -243,11 +243,10 @@ class Teachers extends CI_Controller {
 				'zipcode'=>$this->input->post('zipcode'),
 				'phone'=>$this->input->post('phone'),
 				'blood_group_id'=>$this->input->post('cbo_blood_group'),
-				//'username'=>$this->input->post('username'),
-				//'password'=>$this->input->post('password'),
 				'qualification'=>$this->input->post('qual'),
 				'position'=>$this->input->post('position'),
 				'date_of_joining'=>$this->input->post('doj'),
+				'date_of_leaving'=>$this->input->post('dol'),
 				'displaypicture'=>$displaypicture,
 				'emp_code'=>$this->input->post('EmpCode')
 				
@@ -256,7 +255,7 @@ class Teachers extends CI_Controller {
 			$this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon fa fa-times"></i></button>
 				
-				<i class="icon fa fa-trash-o"></i> Record Updated Successfully.
+				<i class="icon fa fa-check"></i> Record Updated Successfully.
 			  </div>
 			  ');
 			//$this->session->set_flashdata('msg','alert(<i class="icon fa fa-check"></i> Record Updated Successfully.)');

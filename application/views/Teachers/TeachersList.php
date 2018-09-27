@@ -5,11 +5,16 @@
   <section class="content">
     <div class="box">
 	  <div class="box-header with-border">
+	  <div class="col-md-4">
 		<h3 class="box-title"><i class="fa fa-user-secret"></i> Teachers List</h3>
-		
+		</div>
+		<div class="col-md-4" style="color:#FF0000;">
+         <?php echo $this->session->flashdata('msg'); ?>
+        </div>
+		<div class="col-md-4">
         <a class="btn btn-primary btn-sm pull-right" href="<?php echo base_url(); ?>Teachers/addteacher"><i 
 	class="fa fa-plus fa-fw"></i>Add New</a>
-	
+	</div>
       </div>
     </div>
     <!-- Default box -->
