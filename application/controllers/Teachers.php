@@ -29,7 +29,7 @@ class Teachers extends CI_Controller {
 		$data['cbo_blood_group'] = $this->Combo_model->cbo_blood_group();
 		$data['cbo_country'] = $this->Combo_model->cbo_country();
 		$data['teacher_count'] = $this->Teachers_model->series_count($usertype = 4);
-		//print_r($teacher_count);
+		//print_r($data['teacher_count']['count']);
 	    // Field Validation
 		$this->form_validation->set_rules('firstname','First Name','required');
 		$this->form_validation->set_rules('middlename','Middle Name','required');
@@ -86,7 +86,7 @@ class Teachers extends CI_Controller {
 			$std_password = base64_encode($this->input->post('password'));
 			$std_address = $this->input->post('address');
 			$std_img_name = $displaypicture;
-			$std_count = (int)$teacher_count['count'];
+			$std_count = (int)$data['teacher_count']['count'];
 			
 			
 		$data =array

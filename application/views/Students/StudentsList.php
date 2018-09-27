@@ -38,10 +38,10 @@
 				<td align="center"><?php echo $slno; ?></td>
 				<td><img class=" img-responsive img-sm"  
                 src="<?php echo base_url() ?>upload/profile/<?php echo $row['displaypicture']; ?>"/></td>
-				<td><a href="<?php echo base_url(); ?>index.php/Students/single_view/<?php echo $row['id'] ?>"> <?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></a></td>
+				<td><a href="<?php echo base_url(); ?>Students/single_view/<?php echo $row['id'] ?>"> <?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></a></td>
 				<td><?php echo $row['pfirst_name'];?>&nbsp; <?php echo $row['pmiddle_name'];?>&nbsp; <?php echo $row['plast_name'];?></a></td>
                 <td><?php echo $row['class_name']; ?></td>
-				<td><a href="<?php echo base_url(); ?>index.php/Teachers/single_view/<?php echo $row['tid'] ?>"> <?php echo $row['tfirst_name'];?>&nbsp; <?php echo $row['tmiddle_name'];?>&nbsp; <?php echo $row['tlast_name'];?></a></td>
+				<td><a href="<?php echo base_url(); ?>Teachers/single_view/<?php echo $row['tid'] ?>"> <?php echo $row['tfirst_name'];?>&nbsp; <?php echo $row['tmiddle_name'];?>&nbsp; <?php echo $row['tlast_name'];?></a></td>
 				<?php if(strtoupper($row['status']) != 'INACTIVE'   ){?>
                                 <td class="text-center"><span class="label" style="background-color:green; padding:5px; color:#fff"><?php echo $row['status'];?></span></td>
                                 <?php }elseif(strtoupper($row['status']) != 'ACTIVE'  ){?>
@@ -77,7 +77,7 @@
 	var r=confirm("Do you really want to delete?");
 	
 	if (r==true){
-	window.location="<?php echo base_url();?>index.php/Project/"+act+"/"+gotoid;
+	window.location="<?php echo base_url();?>Project/"+act+"/"+gotoid;
 	}
 	
 	}

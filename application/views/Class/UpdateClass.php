@@ -20,13 +20,13 @@
                 <div class="form-group col-sm-4">
                   <label for="classname">Class Name</label>
                   <span style="color:#FF0000">*</span>
-                  <input type="text" class="form-control" id="classname" name="classname" placeholder="class name" 
+                  <input type="text" class="form-control" id="classname" name="classname" placeholder="class name" readonly
 				  value="<?php echo $class_row['class_name'] ?>" onkeyup="isalphanum(this)">
                   <?php echo form_error('classname','<div style="color:#FF0000;">','</div>'); ?> </div>
                 <div class="col-sm-4 form-group">
                   <label for="classnum">Class Section</label>
                   <span style="color:#FF0000">*</span>
-                  <input type="text" class="form-control" id="classsec" name="classsec" placeholder="Class Section" 
+                  <input type="text" class="form-control" id="classsec" name="classsec" placeholder="Class Section" readonly
 				  value="<?php echo $class_row['class_section'] ?>" onkeyup="isalphanum(this)">
 				  </div>
 				
@@ -57,7 +57,7 @@
                   <label for="classnum">Class Room Number</label>
                   <span style="color:#FF0000">*</span>
                   <input type="text" class="form-control" id="classnum" name="classnum" placeholder="Class Room Number" 
-				  value="<?php echo set_value('classnum')?>" onkeyup="isalphanum(this)">
+				  value="<?php echo $class_row['class_number']?>" onkeyup="isalphanum(this)">
 				  </div>
 			  </div>
 			  </div>
