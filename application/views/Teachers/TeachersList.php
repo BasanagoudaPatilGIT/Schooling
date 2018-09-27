@@ -44,7 +44,7 @@
 			    <td align="center"><?php echo $slno; ?></td>
 				<td><img class=" img-responsive img-sm"  
                 src="<?php echo base_url() ?>upload/profile/<?php echo $row['displaypicture']; ?>"/></td>
-				<td><a href="<?php echo base_url(); ?>index.php/Teachers/single_view/<?php echo $row['id'] ?>"> <?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></a></td>
+				<td><a href="<?php echo base_url(); ?>Teachers/single_view/<?php echo $row['id'] ?>"> <?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></a></td>
                 <td><?php echo $row['position']; ?></td>
 				<td><?php echo $row['email']; ?></td>
                 <td><?php echo $row['phone']; ?></td>
@@ -84,7 +84,7 @@
 	var r=confirm("Do you really want to delete?");
 	
 	if (r==true){
-	window.location="<?php echo base_url();?>index.php/Project/"+act+"/"+gotoid;
+	window.location="<?php echo base_url();?>Project/"+act+"/"+gotoid;
 	}
 	
 	}

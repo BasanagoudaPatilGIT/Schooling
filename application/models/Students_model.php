@@ -140,7 +140,7 @@
     
     public function get_single_view($id)
     {
-    $this->db->select('r.*,se.gender_type,c.country_name,co.country_name as per_country_name,cl.class_name');
+    $this->db->select('r.*,se.gender_type,c.country_name,co.country_name as per_country_name,cl.class_name,cl.id as class_id');
     $this->db->from('tab_Students as r');
     $this->db->join('tab_country as c','c.id = r.country_id', 'left');
     $this->db->join('tab_country as co','co.id = r.per_country_id', 'left');
