@@ -1,46 +1,29 @@
-<!-- Content Wrapper. Contains page content -->
-
 <div class="content-wrapper">
-  <!-- Main content -->
-  <section class="content">
-	<div class="box">
-    <!-- left column -->
-	<!-- general form elements -->
-      <div class="box-header with-border">
+  <section class="content" >
+  <div class="box">
+	<div class="box-header with-border">
         <h3 class="box-title"><i class="fa fa-user-secret"></i> Teacher Details</h3>
-      </div>
-	</div><!-- class="box" -->
-      <div class="box">
-		  <div class="box-body">
-                          
-			<div class="col-sm-12">   
-			  <div class="col-sm-3">
-				<div class="box-group  col-sm-12">
-				 <!--panel success-->
-				   <!--panel heading-->
-						  <div class="box-header with-border">
-							 <h4 class="box-title"> Profile :</h4> 
-						  </div><!--panel heading end-->
-						  
-						  <!--main panel body-->
-					   <div class="box-body" style="min-height:360px;">
-						  <div class="col-sm-12" style="padding-left:30px;">
-						  <img class="img-responsive col-sm-10 img-thumbnail" 
-						  src="<?php echo base_url() ?>/upload/profile/<?php echo $teacher_row['displaypicture']; ?>"/></div>
-						<?php /*?><div class="col-sm-12 form-group text-center" style="margin-top:25px;">
-						<b><?php echo $teacher_row['position'] ?></b><br />
-						<?php echo $teacher_row['first_name']?>&nbsp;
-						<?php echo $teacher_row['middle_name']?>&nbsp;
-						<?php echo $teacher_row['last_name']?>&nbsp;<br />
-						<?php echo $teacher_row['phone'] ?><br />
-						<a><?php echo $teacher_row['email'] ?></a>
-						</div><?php */?>
-					  </div>
-				</div>
-			  </div>
-		   
-			   <div class="col-sm-9">
-			  <div class="box-group col-sm-12">
+		<a class="btn btn-primary btn-sm pull-right" href="<?php echo base_url(); ?>Teachers/grid_view"> <i class="fa fa-arrow-left"></i> Back</a>
+     </div>
+  </div>
+
+  
+  <div class="box">
+	<div class="box-body">
+		<div class="col-sm-3">
+		<div class="box-header with-border">
+		 <h4 class="box-title"> Profile :</h4> 
+		</div><!--panel heading end-->
+
+		<!--main panel body-->
+		<div class="box-body" style="min-height:360px;">
+		<div class="col-sm-12" style="padding-left:30px;">
+		<img class="img-responsive col-sm-10 img-thumbnail" 
+		src="<?php echo base_url() ?>/upload/profile/<?php echo $teacher_row['displaypicture']; ?>"/></div>
+		</div>
+		</div>
+	  
+	  <div class="col-sm-9">
 				 <!--panel success-->
 		   <!--panel heading-->
 				  <div class="box-header with-border">
@@ -108,14 +91,11 @@
 				</div>
 				</div>
 				</div>
-				</div>
-			</div> 
-           </div>
-          
-        </div>
-		</div>
-      </div>
-    </div>
-  </section>
+	  
+	  
+  </div>
 </div>
-<!-- /.content-wrapper -->
+
+</div>
+
+
