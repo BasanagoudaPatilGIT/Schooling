@@ -21,6 +21,7 @@
            <?php endforeach ?>
 		  </ul>
         </li>
+		
 		<li><a href="<?php echo base_url()?>Teachers/grid_view"><i class="fa fa-user-secret"></i> <span>Teachers</span></a></li>
 		<li><a href="<?php echo base_url()?>Students/parent_grid_view"><i class="fa fa-users"></i> <span>Parents</span></a></li>
 		<li><a href="<?php echo base_url()?>Classes/grid_view"><i class="fa fa-th"></i> <span>Classes</span></a></li>
@@ -31,7 +32,7 @@
 		<li><a href="<?php echo base_url()?>Events/grid_view"><i class="fa fa-camera-retro"></i> <span>Events</span></a></li>
 		<li><a href="<?php echo base_url()?>Events/grid_view"><i class="fa fa-calendar"></i> <span>TimeTable</span></a></li>
 		<li><a href="<?php echo base_url()?>Events/grid_view"><i class="fa fa-file-text "></i> <span>Leave</span></a></li>
-		<li><a href="<?php echo base_url()?>Events/grid_view"><i class="fa fa-bus"></i> <span>Transportation</span></a></li>
+		<li><a href="<?php echo base_url()?>TransportationDetails/transportation_details"><i class="fa fa-bus"></i> <span>Transportation</span></a></li>
         
        </ul>
     </section>

@@ -143,6 +143,27 @@ class Combo_model extends CI_Model
         return $result_combo = array_combine($id, $value);
     }
 	
+	function cbo_region()
+    { 
+        $this->db->select('id');
+        $this->db->select('region_name');
+        $this->db->from('tab_region');
+		$this->db->order_by('region_name', 'ASC');
+        $query = $this->db->get();
+        $result = $query->result();
+
+        $id = array('');
+        $value = array('-SELECT-');
+
+        for ($i = 0; $i < count($result); $i++)
+        {
+            array_push($id, $result[$i]->id);
+            array_push($value, $result[$i]->region_name);
+        }
+        return $result_combo = array_combine($id, $value);
+    }
+
+	
 	function cbo_country()
     { 
         $this->db->select('id');

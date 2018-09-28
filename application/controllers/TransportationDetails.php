@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Transportation_details extends CI_Controller {
+class TransportationDetails extends CI_Controller {
 
 	public function __construct()
 	{
@@ -12,7 +12,7 @@ class Transportation_details extends CI_Controller {
 			redirect(base_url().'index.php'); 
 		}
 		
-		$this->load->model('Transportation_details_model');
+		$this->load->model('Transportationdetails_model');
 		$this->load->model('Combo_model');
 		$this->load->model('User_model');
 		$this->load->model('Dashboard_model');
@@ -20,21 +20,16 @@ class Transportation_details extends CI_Controller {
 	
 	public function index()
 	{
-		redirect(base_url().'Transportation_details/transportation_details'); 
+		redirect(base_url().'TransportationDetails/transportation_details'); 
 	}
 	
 	
 	public function transportation_details()
 	{
-		$id = $this->uri->segment(3);
-	
-		if (empty($id))
-		{
-			show_404();
-		}
-		$data['transportation'] = $this->Transportation_details_model->view_record('',$id);
+		$data['cbo_region'] = $this->Combo_model->cbo_region();
+		$data['transportation'] = $this->Transportationdetails_model->view_record('');
 		// Field Validation
-		$this->form_validation->set_rules('vehicle_route','Vehicle Route','required');
+		$this->form_validation->set_rules('cbo_region_popup','Region','required');
 		$this->form_validation->set_rules('vehicle_number','Vehicle Number','required');
 		$this->form_validation->set_rules('vehicle_capacity','Vehicle Capacity','required');
 		
@@ -44,7 +39,7 @@ class Transportation_details extends CI_Controller {
 			$data['class_list'] = $this->Dashboard_model->get_class_record();
 			$this->load->view('Home/header',$data);
 			$this->load->view('Home/menu',$data);
-			$this->load->view('Transportation_details/transportation_details',$data);
+			$this->load->view('TransportationDetails/transportationdetails',$data);
 			$this->load->view('Home/footer');
 		}
 		else
@@ -53,14 +48,14 @@ class Transportation_details extends CI_Controller {
 		$data =array
 			(
 				//'status' =>'Active',
-				'vehicle_route' => $this->input->post('vehicle_route'),
+				'region_id' => $this->input->post('cbo_region_popup'),
 				'vehicle_number' => $this->input->post('vehicle_number'),
 				'vehicle_capacity' => $this->input->post('vehicle_capacity')
 			);			
-			$this->Transportation_details_model->add_record($data);
+			$this->Transportationdetails_model->add_record($data);
 			
 			
-			redirect(base_url().'Transportation_details/transportation_details/'.$id); 
+			redirect(base_url().'TransportationDetails/transportation_details'); 
 
 		}
 		
@@ -84,7 +79,7 @@ class Transportation_details extends CI_Controller {
 		$data['class_list'] = $this->Dashboard_model->get_class_record();
 		$this->load->view('Home/header',$data);
 		$this->load->view('Home/menu',$data);
-		$this->load->view('Transportation_details/Transportation_detailsList',$data);
+		$this->load->view('TransportationDetails/TransportationdetailsList',$data);
 		$this->load->view('Home/footer');	
 	}
 	
@@ -108,7 +103,7 @@ class Transportation_details extends CI_Controller {
 			  </div>
 			  ');
 		
-		redirect(base_url().'index.php/Transportation_details/grid_view'); 
+		redirect(base_url().'index.php/TransportationDetails/grid_view'); 
 	}
 
 }
