@@ -24,10 +24,11 @@
     return $this->db->insert('tab_subjects', $data);
     }
     
-    public function edit_record($id,$data)
+	
+	public function update_record($data,$id)
     {
     $this->db->where('id', $id);
-    $this->db->update('tab_teachers', $data);		
+    $this->db->update('tab_subjects', $data);		
     }
     
     public function delete_record($id)
@@ -38,7 +39,7 @@
     
     public function view_record($order_by = '',$id)
     {
-    $this->db->select('s.*,c.class_name, t.first_name,t.last_name');
+    $this->db->select('s.*,c.class_name, t.first_name,t.middle_name,t.last_name');
     $this->db->from('tab_subjects as s');
 	$this->db->join('tab_class as c','c.id = s.class_id', 'left');
 	$this->db->join('tab_teachers as t','t.id = s.sub_teacher_id', 'left');

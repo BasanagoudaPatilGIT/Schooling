@@ -47,12 +47,14 @@
 <script type="text/javascript">
 function passvar(id)
 { 
-alert(id);
+//alert(id);
 $.ajax({
 url:"<?php echo base_url();?>Subjects/geteachsubdetails/"+id,
 success: function(data)
 {
+$('#subid').val(data.id);
 $('#subname').val(data.sub_name);
+$('#cbo_teacher').val(data.sub_teacher_id);
 },
 error: function(){alert('Error');}
 
@@ -60,7 +62,24 @@ error: function(){alert('Error');}
 }
 
 </script>
+<script>
+$('#teacherassingment').click( function(){
+	var id = $('#subid').val();
+	//alert(id);
+	
+	 $.ajax({
+		method:'POST',
+		url:"<?php echo base_url();?>Subjects/teacher_assignment/"+id,
+		data: $('#AssignmentTeacher').serialize(),
+		success : function(data){alert('Record Updated Successfully')},
+		error: function(){}
+		
+	});
 
+	
+});
+
+</script>
 <script>
 
  $(function () {
@@ -368,21 +387,7 @@ $('#createreport').click( function(){
 	
 });
 
-$('#statusupdatebtn').click( function(){
-	var id = $('#idnum').val();
-	//alert(id);
-	
-	 $.ajax({
-		method:'POST',
-		url:"<?php echo base_url();?>TestReport/updatetestreportstatus/"+id,
-		data: $('#updaterecord').serialize(),
-		success : function(data){alert('Record Updated Successfully')},
-		error: function(){}
-		
-	});
 
-	
-});
 
 
 </script>

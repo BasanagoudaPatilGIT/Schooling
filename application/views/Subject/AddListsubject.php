@@ -53,7 +53,6 @@
 				<th>Subject Name</th>
 				<th>Subject Teacher</th>
 				<th>Status</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -62,8 +61,8 @@
               <?php $slno = $slno + 1; ?>
               <tr>
 				<td align="center"><?php echo $slno; ?></td>
-				<td data-toggle="modal" data-target="#sub_id" onclick="passvar(<?php echo $row['id'];?>)"><a><?php echo $row['sub_name']; ?></a></td><!-- Trigger the modal with a anchor tag -->
-				<td><?php echo $row['first_name'];echo " ";echo $row['last_name'] ?></td>
+				<td><a href="" title="Click to add/update teacher assignment" data-toggle="modal" data-target="#sub_id" onclick="passvar(<?php echo $row['id'];?>)"><?php echo $row['sub_name']; ?></a></td><!-- Trigger the modal with a anchor tag -->
+				<td><?php echo $row['first_name'];echo " ";echo $row['middle_name'];echo " "; echo $row['last_name'] ?></td>
 				<?php if(strtoupper($row['status']) != 'INACTIVE'   ){?>
                                 <td class="text-center"><span class="label" style="background-color:green; padding:5px; color:#fff"><?php echo $row['status'];?></span></td>
                                 <?php }elseif(strtoupper($row['status']) != 'ACTIVE'  ){?>
@@ -71,13 +70,6 @@
                                
                                 <?php }?>
 				
-				
-				
-                <td align="center"><a class="btn btn-sm btn-warning btn-sm" href="<?php echo base_url() ?>Students/updatestudent/<?php echo $row["class_id"] ?>" title="Click to Update this TestCase"><i class="fa fa-edit fa-fw fa-lg"></i></a>
-                 <?php if(strtoupper($_SESSION['USER_TYPE']) == '' ){ ?>
-                  <a class="btn btn-danger btn-sm" href="" onClick="show_confirm('delete_record','<?php echo $row["id"] ?>')" title="Click to Delete this TestCase"><i class="fa fa-trash fa-fw fa-lg"></i></a>
-                  <?php } ?>
-                </td>
               </tr>
               <?php endforeach ?>
             </tbody>
@@ -104,34 +96,49 @@
 <!-- /.content-wrapper -->
 
 <!-- Modal -->
-<div id="sub_id" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Subject Details</h4>
-      </div>
-      <div class="modal-body">
-	  <div class="col-sm-4">
-        <label for="sub_name">Subject Name</label>
-		  <span style="color:#FF0000">*</span>
-		 <input type="text" class="form-control" id="sub_name" name="sub_name" placeholder="Subject Name" readonly="" value="">
-		 </div>
-		  <div class="col-sm-4">
-		  <label for="sub_name">Teachers List</label>
-		  <span style="color:#FF0000">*</span>
-		  
-		  </div>
+  <div id="sub_id" class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-sm">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Teacher Assignment</h4>
+        </div>
+        <form id ="AssignmentTeacher">
+		<div class="modal-body">
+		<div class="modal-body">
+		<label for="subname">Subject Name</label>
+		  <input type="hidden" class="form-control" id="subid" name="subid">
+		  <input type="text" class="form-control" id="subname" name="subname" readonly="">
+        </div>
+		<div class="modal-body">
+          <label for="cbo_teacher">Assign Teacher </label>
+		  <?php $attributes = 'class = "form-control" id = "cbo_teacher" name = "cbo_teacher"';
+            echo form_dropdown('cbo_teacher',$cbo_teacher,set_value('cbo_teacher'), $attributes);
+           ?>
+		   
+						
+        </div>
 		</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+        <div class="modal-footer">
+		<button id="teacherassingment" type="submit" class="btn btn-sm btn-primary">Update</button>
+		  <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
+        </div>
+		</form>
+	 </div>
+      
     </div>
-
   </div>
-</div>
+
+
+
+
+
+
+
+
+
 
 <script type="text/javascript">
 	function show_confirm(act,gotoid)

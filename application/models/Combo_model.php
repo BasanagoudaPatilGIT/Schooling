@@ -81,6 +81,25 @@ class Combo_model extends CI_Model
         return $result_combo = array_combine($id, $value);
     }
 	
+	function cbo_teacher_popup()
+    { 
+        $this->db->select('id');
+        $this->db->select('first_name,middle_name,last_name');
+        $this->db->from('tab_teachers');
+        $query = $this->db->get();
+        $result = $query->result();
+
+        $id = array('0');
+        $value = array('-SELECT-');
+
+        for ($i = 0; $i < count($result); $i++)
+        {
+            array_push($id, $result[$i]->id);
+			array_push($value, $result[$i]->first_name . ' ' . $result[$i]->middle_name . ' ' . $result[$i]->last_name);
+        }
+        return $result_combo = array_combine($id, $value);
+    }
+	
 	
 	
 	

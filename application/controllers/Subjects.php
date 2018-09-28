@@ -20,21 +20,21 @@ class Subjects extends CI_Controller {
 	
 	public function index()
 	{
-		redirect(base_url().'Subjects/subject_detailssubject_details'); 
+		redirect(base_url().'Subjects/subject_details'); 
 	}
 	
 	
 	public function subject_details()
 	{
 		$id = $this->uri->segment(3);
-	
+		$order_by = 'ASC';	
 		if (empty($id))
 		{
 			show_404();
 		}
-		$data['subject'] = $this->Subjects_model->view_record('',$id);
-		$data['single'] = $this->Subjects_model->get_record_by_sub_id();
-		print_r($data['single']);
+		$_SESSION['CURRENT_URL'] = current_url();
+		$data['subject'] = $this->Subjects_model->view_record($order_by,$id);
+		$data['cbo_teacher'] = $this->Combo_model->cbo_teacher_popup();
 		// Field Validation
 		$this->form_validation->set_rules('sub_name','Subject Name','required');
 		
@@ -80,32 +80,32 @@ class Subjects extends CI_Controller {
 		$this->output->set_output($output);
 	}
 	
-	
-	public function grid_view()
+	public function teacher_assignment()
 	{
+		
 		$id = $this->uri->segment(3);
-	
-		if ($id==0)
+		if (empty($id))
 		{
-			$this->index();			
-		}	
-		$data['title'] = $_SESSION['TITLE'].''."- Student list";
-		$data['cbo_class'] = $this->Combo_model->cbo_class();
-		//GET DATA FROM TABLE
-		$order_by = 'DESC';	
-		//$usertype = 'Admin';
-			//$data['sub_row'] = $this->Subjects_model->get_record_by_id($id);
-			//print_r($data['sub_row']['class_id']);
-		$data['subject'] = $this->Subjects_model->view_record('',$id);
-		$data['title'] = $_SESSION['TITLE'].''."- Student List";
-		$data['selected_class'] = $this->Dashboard_model->get_selected_class_record('',$id);
-		$data['class_list'] = $this->Dashboard_model->get_class_record();
-		$this->load->view('Home/header',$data);
-		$this->load->view('Home/menu',$data);
-		$this->load->view('Subject1/AddListsubject',$data);
-		$this->load->view('Home/footer');	
+			show_404();
+		}
+		// Field Validation
+		
+		$this->form_validation->set_rules('sub_name','Subject Name','required');
+		
+		$data =array
+			(
+				'sub_teacher_id' => $this->input->post('cbo_teacher'),
+			);			
+			
+			$this->Subjects_model->update_record($data,$id);
+			
+			
+		redirect($_SESSION['CURRENTURL']); 
+
+		
 	}
 
+	
 	public function delete_record($id=0)
 	{
 		$id = $this->uri->segment(3);
