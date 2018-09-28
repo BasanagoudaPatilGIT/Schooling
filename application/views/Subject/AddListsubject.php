@@ -62,7 +62,7 @@
               <?php $slno = $slno + 1; ?>
               <tr>
 				<td align="center"><?php echo $slno; ?></td>
-				<td><a data-toggle="modal" data-target="#sub_id"><?php echo $row['sub_name']; ?></a></td><!-- Trigger the modal with a anchor tag -->
+				<td data-toggle="modal" data-target="#sub_id" onclick="passvar(<?php echo $row['id'];?>)"><a><?php echo $row['sub_name']; ?></a></td><!-- Trigger the modal with a anchor tag -->
 				<td><?php echo $row['first_name'];echo " ";echo $row['last_name'] ?></td>
 				<?php if(strtoupper($row['status']) != 'INACTIVE'   ){?>
                                 <td class="text-center"><span class="label" style="background-color:green; padding:5px; color:#fff"><?php echo $row['status'];?></span></td>
@@ -117,9 +117,8 @@
 	  <div class="col-sm-4">
         <label for="sub_name">Subject Name</label>
 		  <span style="color:#FF0000">*</span>
-		 <input type="text" class="form-control" id="sub_name" name="sub_name" placeholder="Subject Name" readonly
-		  value="<?php echo $single['sub_name']; ?>" onkeyup="isalpha(this)">
-		  <?php echo form_error('sub_name','<div style="color:#FF0000;">','</div>'); ?> </div>
+		 <input type="text" class="form-control" id="sub_name" name="sub_name" placeholder="Subject Name" readonly="" value="">
+		 </div>
 		  <div class="col-sm-4">
 		  <label for="sub_name">Teachers List</label>
 		  <span style="color:#FF0000">*</span>

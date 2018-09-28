@@ -74,10 +74,11 @@
     return $query->result_array();
     }
 	
-	public function get_record_by_sub_id()
+	public function get_record_by_sub_id($id)
     {
     $this->db->select('s.*');
     $this->db->from('tab_subjects as s');
+	$this->db->where('id', $id);
     $query = $this->db->get();
     return $query->row_array();
     }

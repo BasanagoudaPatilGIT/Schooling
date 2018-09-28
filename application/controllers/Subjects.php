@@ -65,6 +65,22 @@ class Subjects extends CI_Controller {
 		
 	}
 	
+	public function geteachsubdetails()
+	{
+		$id = $this->uri->segment(3);
+		
+		
+		$data['result'] = $this->Subjects_model->get_record_by_sub_id($id);
+		
+		//print_r($data['result']);
+		
+		$output = json_encode( $data['result'] );
+		
+		$this->output->set_content_type('application/json');
+		$this->output->set_output($output);
+	}
+	
+	
 	public function grid_view()
 	{
 		$id = $this->uri->segment(3);

@@ -44,7 +44,22 @@
 <script src="<?php echo base_url() ?>LTE-Jar/bower_components/dataTables.net/js/jquery.dataTables.min.js"></script>
 
 <script src="<?php echo base_url() ?>LTE-Jar/bower_components/dataTables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+function passvar(id)
+{ 
+alert(id);
+$.ajax({
+url:"<?php echo base_url();?>Subjects/geteachsubdetails/"+id,
+success: function(data)
+{
+$('#subname').val(data.sub_name);
+},
+error: function(){alert('Error');}
 
+});
+}
+
+</script>
 
 <script>
 
@@ -65,6 +80,9 @@
 });
 
 </script>
+
+
+
 <script>
 $('#packdate').datepicker({
 	format: 'yyyy-mm-dd',
@@ -212,37 +230,6 @@ $('#preview').click( function(){
 
 
 
-<script type="text/javascript">
-function passvar(id)
-{ 
-//alert(id);
-$.ajax({
-url:"<?php echo base_url();?>TestReport/getrows/"+id,
-success: function(data)
-{
-$('#modulename').val(data.module_name);
-$('#featurename').val(data.feature_name);
-$('#highlevelscenario').val(data.high_level_scenario);
-$('#checkpoints').val(data.checkpoints);
-$('#executionstep').val(data.execution_steps);
-$('#expectedresult').val(data.expected_result);
-$('#cbo_status').val(data.test_status);
-$('#updatebugid').val(data.bug_id);
-$('#cbo_bug_status').val(data.bug_status);
-$('#cbo_tester').val(data.tested_by);
-$('#cbo_assign').val(data.assigned_to);
-$('#cbo_dev_status').val(data.developer_status);
-$('#comments').val(data.comments);
-$('#idnum').val(data.id);
-$('#idnumber').val(data.testcase_id);
-//$('#comment').text(data.comments);
-},
-error: function(){alert('Error');}
-
-});
-}
-
-</script>
 
 <script type="text/javascript">
 function allcomments(id)
