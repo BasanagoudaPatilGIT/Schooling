@@ -122,11 +122,23 @@ class Json_model extends CI_Model
 		return $query->row_array();
 	}
 	
-	public function get_student_rollnum($class_id)
+	public function get_student_section($class_id)
+	{
+		$this->db->select('class_section');
+		$this->db->from('tab_class as s');
+		$this->db->where('id',$class_id);
+		/*if($order_by != ''){
+			$this->db->order_by('s.id',$order_by);
+		}*/
+		$query = $this->db->get();		
+		return $query->row_array();
+	}
+	
+	public function get_student_rollnum($section)
 	{
 		$this->db->select('count');
 		$this->db->from('tab_class as s');
-		$this->db->where('id',$class_id);
+		$this->db->where('class_section',$section);
 		/*if($order_by != ''){
 			$this->db->order_by('s.id',$order_by);
 		}*/
