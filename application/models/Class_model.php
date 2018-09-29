@@ -13,7 +13,7 @@
     //SELECT MAX ID
     $max_id = 1;
     $this->db->select_max('id');
-    $query = $this->db->get('tab_class');
+    $query = $this->db->get('tab_section');
     $row = $query->row();
     if (isset($row))
     {
@@ -21,10 +21,54 @@
     }
     
     $data['id'] = $max_id;
-    return $this->db->insert('tab_class', $data);
+    return $this->db->insert('tab_section', $data);
+    }
+	
+	public function add_to_section_record($data)
+    {
+    //SELECT MAX ID
+    $max_id = 1;
+    $this->db->select_max('id');
+    $query = $this->db->get('tab_teacher_assignment');
+    $row = $query->row();
+	if (isset($row))
+    {
+    $max_id = $row->id + 1;
+    }
+    $section_id = 1;
+    $this->db->select_max('id');
+    $query = $this->db->get('tab_section');
+    $row = $query->row();
+	$section_id = $row->id ;
+    $data['id'] = $max_id;
+	$data['section_id'] = $section_id;
+    return $this->db->insert('tab_teacher_assignment', $data);
+    }
+	
+	public function add_teacher_assignment_record($data)
+    {
+    //SELECT MAX ID
+    $max_id = 1;
+    $this->db->select_max('id');
+    $query = $this->db->get('tab_teacher_assignment');
+    $row = $query->row();
+    if (isset($row))
+    {
+    $max_id = $row->id + 1;
     }
     
-    public function edit_record($id,$data)
+    $data['id'] = $max_id;
+    return $this->db->insert('tab_teacher_assignment', $data);
+    }
+    
+    public function update_teacher_assignment_record($data,$classid,$sectionid)
+    {
+    $this->db->where('class_id', $classid);
+	$this->db->where('section_id', $sectionid);
+    $this->db->update('tab_teacher_assignment', $data);		
+    }
+	
+	public function edit_record($id,$data)
     {
     $this->db->where('id', $id);
     $this->db->update('tab_class', $data);		
@@ -47,17 +91,32 @@
     
     public function view_record($order_by = '')
     {
-    $this->db->select('c.*,t.first_name,t.middle_name,t.last_name');
-    $this->db->from('tab_class as c');
-	$this->db->join('tab_teachers as t','t.id = c.class_teacher_id', 'left');
-	//$this->db->where('s.status','Active');
-	//$this->db->where('s.class_id','c.id');
+    $this->db->select('c.class_name,s.*,t.first_name,t.middle_name,t.last_name');
+    $this->db->from('tab_section as s');
+	$this->db->join('tab_class as c','c.id = s.class_id', 'left');
+	$this->db->join('tab_teachers as t','t.id = s.teacher_id', 'left');
     if($order_by != ''){
-    $this->db->order_by('c.id',$order_by);
+    $this->db->order_by('s.id',$order_by);
     }
     $query = $this->db->get();		
     return $query->result_array();
     }
+	
+	public function teacher_assignment_record($order_by = '')
+    {
+    $this->db->select('c.class_name,s.*,t.first_name,t.middle_name,t.last_name');
+    $this->db->from('tab_section as s');
+	$this->db->join('tab_class as c','c.id = s.class_id', 'left');
+	$this->db->join('tab_teacher_assignment as ta','ta.section_id = s.id', 'left');
+	$this->db->join('tab_teachers as t','t.id = ta.teacher_id', 'left');
+    if($order_by != ''){
+    $this->db->order_by('s.id',$order_by);
+    }
+    $query = $this->db->get();		
+    return $query->result_array();
+    }
+	
+	
 	
 	public function get_class_student_count($id)
     {

@@ -62,6 +62,100 @@ error: function(){alert('Error');}
 }
 
 </script>
+
+<script>
+$(document).ready(function() {
+$('#cbo_class').change( function(){
+				var id = $('#cbo_class').val();
+				if( $('#rollnum').val() != '' ){
+				$('#rollnum').val('');
+				}
+				//alert(id);
+				
+				$.ajax({
+					url:"<?php echo base_url();?>json/get_student_section/"+id,
+					success: function(data){
+						$("#cbo_section option").each(function(index, element) {
+                            if( $(this).val() != '' ){
+								$(this).remove();
+							}
+							
+                        });
+						
+						$.each(data, function(key, value){
+							//alert(value.id + " " + value.class_section);
+							$("#cbo_section").append("<option value='" + value.id + "'>" +  value.class_section + "</option>");
+						});
+					},
+					error: function(){alert('Error');}
+				});
+			});
+});
+</script>
+<script>
+//Class and Roll Number chnages
+
+			$('#cbo_section').change( function(){
+				var id = $('#cbo_section').val();
+				//alert(id);
+				if( $('#cbo_section').val() != 'selected' ){
+				$('#rollnum').val('');
+				}
+				$.ajax({
+					url:"<?php echo base_url();?>json/get_student_rollnum/"+id,
+					success: function(data){
+						//alert(id);
+						$("#rollnum").val(data.count);
+					},
+					error: function(){alert('Error');}
+				});
+			});
+</script>
+
+
+<script>
+$(document).ready(function() {
+$('#cbo_class_list').change( function(){
+				var id = $('#cbo_class_list').val();
+				//alert(id);
+				
+				$.ajax({
+					url:"<?php echo base_url();?>json/get_student_section/"+id,
+					success: function(data){
+						$("#cbo_section_list option").each(function(index, element) {
+                            if( $(this).val() != '' ){
+								$(this).remove();
+							}
+							
+                        });
+						
+						$.each(data, function(key, value){
+							//alert(value.id + " " + value.class_section);
+							$("#cbo_section_list").append("<option value='" + value.id + "'>" +  value.class_section + "</option>");
+						});
+					},
+					error: function(){alert('Error');}
+				});
+			});
+});
+</script>
+<script>
+//Class and Roll Number chnages
+
+			$('#cbo_section_list').change( function(){
+				var id = $('#cbo_section_list').val();
+				//alert(id);
+				$.ajax({
+					url:"<?php echo base_url();?>json/get_teacher_section/"+id,
+					success: function(data){
+					//alert(data.id);
+					$("#cbo_teacher_list").val(data.id);	
+					},
+					error: function(){alert('Error');}
+				});
+			});
+</script>
+
 <script>
 $('#teacherassingment').click( function(){
 	var id = $('#subid').val();
@@ -474,23 +568,7 @@ $('#testupload').click( function(){
    });//FAMILY END
 </script>
 
-<script>
-//Class and Roll Number chnages
 
-			$('#cbo_class').change( function(){
-				var id = $('#cbo_class').val();
-				//alert(id);
-				
-				$.ajax({
-					url:"<?php echo base_url();?>json/get_student_rollnum/"+id,
-					success: function(data){
-						//alert(id);
-						$("#rollnum").val(data.count);
-					},
-					error: function(){alert('Error');}
-				});
-			});
-</script>
 </body>
 </html>
 

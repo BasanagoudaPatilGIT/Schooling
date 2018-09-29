@@ -7,12 +7,13 @@
 	$this->load->database();
 	}
 	
-	public function get_class_record($order_by = '')
+	public function get_class_record($order_by = 'ASC')
 	{
-	$this->db->select('c.*');
+	$this->db->select('c.*,s.*');
 	$this->db->from('tab_class as c');
+	$this->db->join('tab_section as s', 's.class_id = c.id','left');
 	if($order_by != ''){
-	$this->db->order_by('v.id',$order_by);
+	$this->db->order_by('s.class_id',$order_by);
 	}
 	$query = $this->db->get();		
 	return $query->result_array();
@@ -20,11 +21,12 @@
 	
 	public function get_selected_class_record($order_by = '',$id)
 	{
-	$this->db->select('c.*');
+	$this->db->select('c.*,s.*');
 	$this->db->from('tab_class as c');
-	$this->db->where('id', $id);
+	$this->db->join('tab_section as s', 's.class_id = c.id','left');
+	$this->db->where('s.class_id', $id);
 	if($order_by != ''){
-	$this->db->order_by('v.id',$order_by);
+	$this->db->order_by('c.class_name',$order_by);
 	}
 	$query = $this->db->get();		
 	return $query->row_array();

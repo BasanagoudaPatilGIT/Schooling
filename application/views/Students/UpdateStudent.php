@@ -19,14 +19,6 @@
       <!-- form start -->
       <form role="form" method="post" action="<?php echo base_url()?>Students/updateStudent/<?php echo $student_row['id'] ?>" enctype="multipart/form-data">
         <div class="box-body">
-		  <div class="panel panel-primary col-sm-12" style="padding:12px;">
-			<div class="form-group col-sm-4">
-             <label for="firstname">Admission number: </label>
-              <span style="color:#FF0000">*</span>
-               <input type="text" class="form-control" id="admission_no" name="admission_no" placeholder="Admission Number" 
-				value="<?php echo $student_row['admission_no']?>" onkeyup="isalpha(this)">
-                <?php echo form_error('admission_no','<div style="color:#FF0000;">','</div>'); ?> </div>
-			</div>
           <div class="col-sm-6">
             <div class="h4"><i class="fa fa-bandcamp" aria-hidden="true"></i> Personal Details</div>
             <div class="panel panel-primary col-sm-12"  style="padding:12px;">
@@ -189,31 +181,40 @@
 		  <div class="form-group col-sm-12">
                   <label for="firstname">Admission number: </label>
                   <span style="color:#FF0000">*</span>
-                  <input type="text" class="form-control" id="admission_no" name="admission_no" placeholder="Admission Number"  readonly=""
+                  <input type="text" class="form-control" id="admission_no" name="admission_no" placeholder="Admission Number"  disabled=""
 				  value="<?php echo $student_row['admission_no']?>" onkeyup="isalpha(this)">
-                  <?php echo form_error('admission_no','<div style="color:#FF0000;">','</div>'); ?> </div>
-              <div class="col-sm-6 form-group">
-                <label for="empcode">Roll Nummber</label>
-                <input type="text" class="form-control" id="rollnum" name="rollnum" placeholder="Roll Number" value="<?php echo $student_row['roll_num']?>">
-				<?php echo form_error('rollnum','<div style="color:#FF0000;">','</div>'); ?>
-              </div>
-			  <div class="col-sm-6 form-group">
-                <label for="Class">Class</label><span style="color:#FF0000">*</span>
-				<?php $attributes = 'class = "form-control" id = "cbo_class" name = "cbo_class"';
+                  <?php echo form_error('admission_no','<div style="color:#FF0000;">','</div>'); ?> 
+				  </div>
+				<div class="col-sm-6 form-group">
+                <label for="Class">Class</label>
+				<?php $attributes = 'class = "form-control" id = "cbo_class" name = "cbo_class" disabled=""';
                         echo form_dropdown('cbo_class',$cbo_class,$student_row['class_id'], $attributes);
                    ?>
-				   <?php echo form_error('cbo_class','<div style="color:#FF0000;">','</div>'); ?>
               </div>
-            </div>
-            <div class="row">
+			  <div class="col-sm-6 form-group">
+                <label for="section">Section</label>
+				<input type="text" class="form-control" id="section" name="section" placeholder="Section" disabled="" value="<?php echo set_value('section')?>">
+              </div>
               <div class="col-sm-6 form-group">
-                <label for="Doj">Date of Join</label>
-				<span style="color:#FF0000">*</span>
-                <input type="text"  class="form-control datepicker" id="doj" name="doj" placeholder="Date of Join"  
-				value="<?php echo $student_row['date_of_joining']?>" readonly="" title="You can't modify this field">
-				<?php echo form_error('doj','<div style="color:#FF0000;">','</div>'); ?>
+                <label for="empcode">Roll Nummber</label>
+                <input type="text" class="form-control" id="rollnum" name="rollnum" disabled="" placeholder="Roll Number" value="<?php echo $student_row['roll_num']?>">
               </div>
-              <?php if(strtoupper($_SESSION['USER_TYPE']) == '' ){?>
+			  <div class="col-sm-6 form-group">
+                <label for="Doj">Date of Joining</label>
+                <input type="text"  class="form-control " id="doj" name="doj" placeholder="Date of Join" disabled=""
+				value="<?php echo $student_row['date_of_joining']?>">
+              </div>
+              <div class="col-sm-6 form-group">
+                <label for="Doj">Date of Leaving</label>
+				<?php if($student_row['date_of_leaving'] == '0000-00-00' ){?>
+                <input type="text"  class="form-control datepicker" id="doj" name="doj" placeholder="Date of Leaving"  
+				value="<?php echo set_value('admission_no')?>">
+				<?php }else {?>
+				<input type="text"  class="form-control datepicker" id="doj" name="doj" placeholder="Date of Leaving"  
+				value="<?php echo $student_row['date_of_leaving']?>">
+				 <?php }?>
+              </div>
+              <?php if(strtoupper($_SESSION['USER_TYPE']) == 'ADMIN' ){?>
                   <div class="col-sm-6 form-group">
                     <label for="Status">Status </label>
                     <?php
@@ -343,9 +344,9 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer" align="right">
-          <button type="submit" class="btn btn-primary">Save</button>
-          <button type="reset" class="btn btn-primary">Reset</button>
-          <a class="btn btn-primary" href="<?php echo base_url(); ?>Students/grid_view"> <i class="fa fa-arrow-left"></i> Back</a> </div>
+          <button type="submit" class="btn btn-sm btn-primary">Save</button>
+          <button type="reset" class="btn btn-sm  btn-primary">Reset</button>
+          <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>Students/grid_view/<?php echo $_SESSION['CLSID'] ?>"> <i class="fa fa-arrow-left"></i> Back</a> </div>
       </form>
     </div><!-- div class="box body" -->
 </div><!-- div class="box" -->

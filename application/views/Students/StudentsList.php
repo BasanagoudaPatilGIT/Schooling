@@ -21,6 +21,7 @@
               <tr>
 			  
                 <th>Sl No</th>
+				<th>id</th>
 				<th>Picture</th>
                 <th>Student Name</th>
 				<th>Parent Name</th>
@@ -36,9 +37,10 @@
               <?php $slno = $slno + 1; ?>
               <tr>
 				<td align="center"><?php echo $slno; ?></td>
+				<td align="center"><?php echo $row['stdid']; ?></td>
 				<td><img class=" img-responsive img-sm"  
                 src="<?php echo base_url() ?>upload/profile/<?php echo $row['displaypicture']; ?>"/></td>
-				<td><a href="<?php echo base_url(); ?>Students/single_view/<?php echo $row['id'] ?>"> <?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></a></td>
+				<td><a href="<?php echo base_url(); ?>Students/single_view/<?php echo $row['stdid'] ?>"> <?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></a></td>
 				<td><?php echo $row['pfirst_name'];?>&nbsp; <?php echo $row['pmiddle_name'];?>&nbsp; <?php echo $row['plast_name'];?></a></td>
                 <td><?php echo $row['class_name']; ?></td>
 				<td><a href="<?php echo base_url(); ?>Teachers/single_view/<?php echo $row['tid'] ?>"> <?php echo $row['tfirst_name'];?>&nbsp; <?php echo $row['tmiddle_name'];?>&nbsp; <?php echo $row['tlast_name'];?></a></td>
@@ -50,9 +52,9 @@
                                 <?php }?>
 				
 				
-                <td align="center"><a class="btn btn-sm btn-warning btn-sm" href="<?php echo base_url() ?>Students/updatestudent/<?php echo $row["class_id"] ?>" title="Click to Update this TestCase"><i class="fa fa-edit fa-fw fa-lg"></i></a>
+                <td align="center"><a class="btn btn-sm btn-warning btn-sm" href="<?php echo base_url() ?>Students/updatestudent/<?php echo $row["stdid"] ?>" title="Click to Update this TestCase"><i class="fa fa-edit fa-fw fa-sm"></i></a>
                  <?php if(strtoupper($_SESSION['USER_TYPE']) == '' ){ ?>
-                  <a class="btn btn-danger btn-sm" href="" onClick="show_confirm('delete_record','<?php echo $row["id"] ?>')" title="Click to Delete this TestCase"><i class="fa fa-trash fa-fw fa-lg"></i></a>
+                  <a class="btn btn-danger btn-sm" href="" onClick="show_confirm('delete_record','<?php echo $row["stdid"] ?>')" title="Click to Delete this TestCase"><i class="fa fa-trash fa-fw fa-sm"></i></a>
                   <?php } ?>
                 </td>
               </tr>

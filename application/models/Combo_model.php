@@ -48,7 +48,7 @@ class Combo_model extends CI_Model
 	
 	function cbo_class()
     {
-		$sql = "SELECT id,class_name FROM tab_class WHERE count <= class_capacity";		
+		$sql = "SELECT c.id,c.class_name FROM tab_class as c join tab_section as sc on (c.id = sc.class_id) WHERE sc.count <= sc.class_capacity";		
         $query = $this->db->query($sql);
         $result = $query->result();
 		$id = array('');
@@ -58,6 +58,54 @@ class Combo_model extends CI_Model
         {
             array_push($id, $result[$i]->id);
             array_push($value, $result[$i]->class_name);
+        }
+        return $result_combo = array_combine($id, $value);
+    }
+	
+	function cbo_class_list()
+    {
+		$sql = "SELECT id,class_name FROM tab_class";		
+        $query = $this->db->query($sql);
+        $result = $query->result();
+		$id = array('');
+        $value = array('-SELECT-');
+
+        for ($i = 0; $i < count($result); $i++)
+        {
+            array_push($id, $result[$i]->id);
+            array_push($value, $result[$i]->class_name);
+        }
+        return $result_combo = array_combine($id, $value);
+    }
+	
+	function cbo_section()
+    {
+		$sql = "SELECT  DISTINCT class_section,id FROM tab_section WHERE count <= class_capacity group by class_section";		
+        $query = $this->db->query($sql);
+        $result = $query->result();
+		$id = array('');
+        $value = array('-SELECT-');
+
+        for ($i = 0; $i < count($result); $i++)
+        {
+            array_push($id, $result[$i]->id);
+            array_push($value, $result[$i]->class_section);
+        }
+        return $result_combo = array_combine($id, $value);
+    }
+	
+	function cbo_section_list()
+    {
+		$sql = "SELECT  DISTINCT class_section,id FROM tab_section group by class_section";		
+        $query = $this->db->query($sql);
+        $result = $query->result();
+		$id = array('');
+        $value = array('-SELECT-');
+
+        for ($i = 0; $i < count($result); $i++)
+        {
+            array_push($id, $result[$i]->id);
+            array_push($value, $result[$i]->class_section);
         }
         return $result_combo = array_combine($id, $value);
     }

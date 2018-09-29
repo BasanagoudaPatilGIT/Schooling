@@ -27,12 +27,14 @@ class Students extends CI_Controller {
 	public function addStudent()
 	{
 		$data['cbo_class'] = $this->Combo_model->cbo_class();
+		$data['cbo_section'] = $this->Combo_model->cbo_section();
 		$data['cbo_sex'] = $this->Combo_model->cbo_sex();
 		$data['pcbo_sex'] = $this->Combo_model->cbo_sex();
 		$data['cbo_blood_group'] = $this->Combo_model->cbo_blood_group();
 		$data['cbo_country'] = $this->Combo_model->cbo_country();
 		$data['percbo_country'] = $this->Combo_model->cbo_country();
 		$data['pcbo_blood_group'] = $this->Combo_model->cbo_blood_group();
+		
 		//$data['cbo_rollnum'] = $this->Combo_model->cbo_rollnum();
 	
 	    // Field Validation
@@ -58,6 +60,7 @@ class Students extends CI_Controller {
 		$this->form_validation->set_rules('doj','Date of Joining','required');
 		$this->form_validation->set_rules('pphone','Phone Number','required');
 		$this->form_validation->set_rules('cbo_class','Class','required');
+		$this->form_validation->set_rules('cbo_section','Section','required');
 		//$this->form_validation->set_rules('class','Class','required');
 		$this->form_validation->set_rules('pfirstname','First Name','required');
 		$this->form_validation->set_rules('pmiddlename','Middle Name','required');
@@ -138,6 +141,7 @@ class Students extends CI_Controller {
 				'date_of_joining'=>$this->input->post('doj'),
 				'roll_num'=>$this->input->post('rollnum'),
 				'class_id'=>$this->input->post('cbo_class'),
+				'section_id'=>$this->input->post('cbo_section'),
 				'displaypicture'=>$displaypicture
 				
 			);			
@@ -286,10 +290,8 @@ class Students extends CI_Controller {
 		$this->form_validation->set_rules('perzipcode','Zipcode','required|max_length[6]|min_length[6]');
 		$this->form_validation->set_rules('dob','Date Of Birth','required');
 		$this->form_validation->set_rules('cbo_sex','Gender','required');
-		$this->form_validation->set_rules('rollnum','Roll Number','required');
 		$this->form_validation->set_rules('doj','Date of Joining','required');
 		$this->form_validation->set_rules('pphone','Phone Number','required');
-		$this->form_validation->set_rules('cbo_class','Class','required');
 		//$this->form_validation->set_rules('class','Class','required');
 		$this->form_validation->set_rules('pfirstname','First Name','required');
 		$this->form_validation->set_rules('pmiddlename','Middle Name','required');
@@ -358,7 +360,6 @@ class Students extends CI_Controller {
 		$data =array
 			(
 				'user_type'=>'Student',
-				'admission_no' => $this->input->post('admission_no'),
 				'first_name'=>$this->input->post('firstname'),
 				'middle_name'=>$this->input->post('middlename'),
 				'last_name'=>$this->input->post('lastname'),
@@ -375,11 +376,7 @@ class Students extends CI_Controller {
 				'per_zipcode'=>$this->input->post('perzipcode'),
 				'phone'=>$this->input->post('phone'),
 				'blood_group_id'=>$this->input->post('cbo_blood_group'),
-				//'username'=>$this->input->post('username'),
-				//'password'=>$this->input->post('password'),
-				'date_of_joining'=>$this->input->post('doj'),
-				'roll_num'=>$this->input->post('rollnum'),
-				'class_id'=>$this->input->post('cbo_class'),
+				'date_of_leaving'=>$this->input->post('dol'),
 				'displaypicture'=>$displaypicture
 				
 			);	
@@ -397,8 +394,6 @@ class Students extends CI_Controller {
 				'gender_id'=>$this->input->post('pcbo_sex'),
 				'phone'=>$this->input->post('pphone'),
 				'blood_group_id'=>$this->input->post('percbo_blood_group'),
-				//'username'=>$this->input->post('pusername'),
-				//'password'=>$this->input->post('ppassword'),
 				'qualification'=>$this->input->post('pqual'),
 				'profession'=>$this->input->post('profession'),
 				'displaypicture'=>$pdisplaypicture,
@@ -418,7 +413,7 @@ class Students extends CI_Controller {
 	public function grid_view()
 	{
 		$id = $this->uri->segment(3);
-	
+		$_SESSION['CLSID'] = $id;
 		if ($id==0)
 		{
 			$this->index();			

@@ -124,21 +124,32 @@ class Json_model extends CI_Model
 	
 	public function get_student_section($class_id)
 	{
-		$this->db->select('class_section');
-		$this->db->from('tab_class as s');
-		$this->db->where('id',$class_id);
+		$this->db->select('s.id,s.class_section');
+		$this->db->from('tab_section as s');
+		$this->db->where('s.class_id',$class_id);
 		/*if($order_by != ''){
 			$this->db->order_by('s.id',$order_by);
 		}*/
 		$query = $this->db->get();		
+		return $query->result_array();
+	}
+	
+	public function get_teacher_section($section_id)
+	{
+		$this->db->select('t.id,t.first_name,t.middle_name,t.last_name');
+		$this->db->from('tab_teacher_assignment as ta');
+		$this->db->where('ta.id',$section_id);
+		$this->db->join(' tab_section as s','s.id = ta.section_id','left');
+		$this->db->join('tab_teachers as t','t.id = ta.teacher_id','left');
+		$query = $this->db->get();		
 		return $query->row_array();
 	}
 	
-	public function get_student_rollnum($section)
+	public function get_student_rollnum($section_id)
 	{
 		$this->db->select('count');
-		$this->db->from('tab_class as s');
-		$this->db->where('class_section',$section);
+		$this->db->from('tab_section as s');
+		$this->db->where('id',$section_id);
 		/*if($order_by != ''){
 			$this->db->order_by('s.id',$order_by);
 		}*/
