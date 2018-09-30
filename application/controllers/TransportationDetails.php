@@ -27,6 +27,7 @@ class TransportationDetails extends CI_Controller {
 	public function transportation_details()
 	{
 		$data['cbo_region'] = $this->Combo_model->cbo_region();
+		$data['cbo_vehicle_num'] = $this->Combo_model->cbo_vehicle_num();
 		$data['transportation'] = $this->Transportationdetails_model->view_record('');
 		// Field Validation
 		$this->form_validation->set_rules('cbo_region_popup','Region','required');
@@ -53,6 +54,42 @@ class TransportationDetails extends CI_Controller {
 				'vehicle_capacity' => $this->input->post('vehicle_capacity')
 			);			
 			$this->Transportationdetails_model->add_record($data);
+			
+			
+			redirect(base_url().'TransportationDetails/transportation_details'); 
+
+		}
+		
+	}
+	
+	public function route_mapping()
+	{
+		$data['cbo_vehicle_num'] = $this->Combo_model->cbo_vehicle_num();
+		
+		// Field Validation
+		
+		$this->form_validation->set_rules('cbo_vehicle_num','Vehicle Number','required');
+		
+		
+		if(($this->form_validation->run())==false)
+		{
+			$data['title'] = $_SESSION['TITLE'].''."- Transportation details";
+			$data['class_list'] = $this->Dashboard_model->get_class_record();
+			$this->load->view('Home/header',$data);
+			$this->load->view('Home/menu',$data);
+			$this->load->view('TransportationDetails/transportationdetails',$data);
+			$this->load->view('Home/footer');
+		}
+		else
+		{
+		
+		$data =array
+			(
+				//'status' =>'Active',
+				'vehicle_id' => $this->input->post('cbo_vehicle_num'),
+				'route_name' => $this->input->post('vehicle_route')
+			);			
+			$this->Transportationdetails_model->add_route_mapping_record($data);
 			
 			
 			redirect(base_url().'TransportationDetails/transportation_details'); 
@@ -105,5 +142,5 @@ class TransportationDetails extends CI_Controller {
 		
 		redirect(base_url().'index.php/TransportationDetails/grid_view'); 
 	}
-
+	
 }

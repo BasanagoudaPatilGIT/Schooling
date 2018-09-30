@@ -15,7 +15,7 @@
 		  <h3 class="box-title"><i class="fa fa-book"></i> Add New</h3>
 		  </div>
 		 <?php $id = $this->uri->segment(3); ?>
-		<form method="post" action="<?php echo base_url()?>TransportationDetails/transportation_details">
+		<form method="post" action="<?php echo base_url()?>TransportationDetails/route_mapping">
 		  
 		  <div class="box-body">
 			<div class="form-group col-sm-12">
@@ -30,9 +30,10 @@
 				   <div class="form-group col-sm-12">
                   <label for="vehicle_number">Vehicle Number</label>
                   <span style="color:#FF0000">*</span>
-                  <input type="text" class="form-control" id="vehicle_number" name="vehicle_number" placeholder="Vehicle Number" 
-				  value="<?php echo set_value('vehicle_number')?>" onkeyup="isalpha(this)">
-                  <?php echo form_error('vehicle_number','<div style="color:#FF0000;">','</div>'); ?> </div>
+                  <?php $attributes = 'class = "form-control" id = "cbo_vehicle_num" name = "cbo_vehicle_num"';
+						echo form_dropdown('cbo_vehicle_num',$cbo_vehicle_num,set_value('cbo_vehicle_num'), $attributes);
+						?> 
+						<?php echo form_error('cbo_vehicle_num','<div style="color:#FF0000;">','</div>'); ?> </div>
 				   
 				  <div class="form-group col-sm-12">
                   <label for="vehicle_route">Vehicle Route</label>
@@ -76,7 +77,7 @@
               <tr>
 				<td align="center"><?php echo $slno; ?></td>
 				<td><?php echo $row['region_name']; ?></td>
-				<td><?php echo $row['vehicle_route']; ?></td>
+				<td><?php echo $row['route_name']; ?></td>
 				<td><?php echo $row['vehicle_number'];?></td>
 				<td><?php echo $row['vehicle_capacity'];?></td>
 				

@@ -522,5 +522,25 @@ class Combo_model extends CI_Model
         return $result_combo = array_combine($id, $value);
     }
 	
+	function cbo_vehicle_num()
+    { 
+        $this->db->select('id');
+        $this->db->select('vehicle_number');
+        $this->db->from('tab_transportation');
+		$this->db->order_by('vehicle_number', 'ASC');
+        $query = $this->db->get();
+        $result = $query->result();
+
+        $id = array('');
+        $value = array('-SELECT-');
+
+        for ($i = 0; $i < count($result); $i++)
+        {
+            array_push($id, $result[$i]->id);
+            array_push($value, $result[$i]->vehicle_number);
+        }
+        return $result_combo = array_combine($id, $value);
+    }
+	
 }
       

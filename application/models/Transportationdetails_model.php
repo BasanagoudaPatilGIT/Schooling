@@ -24,6 +24,22 @@
     return $this->db->insert('tab_transportation', $data);
     }
     
+	public function add_route_mapping_record($data)
+    {
+    //SELECT MAX ID
+    $max_id = 1;
+    $this->db->select_max('id');
+    $query = $this->db->get('tab_route_mapping');
+    $row = $query->row();
+    if (isset($row))
+    {
+    $max_id = $row->id + 1;
+    }
+    
+    $data['id'] = $max_id;
+	
+    return $this->db->insert('tab_route_mapping', $data);
+    }
 	
 	public function update_record($data,$id)
     {
@@ -39,9 +55,10 @@
     
     public function view_record($order_by = '')
     {
-    $this->db->select('s.*,r.region_name');
+    $this->db->select('s.*,r.region_name,rm.route_name');
     $this->db->from('tab_transportation as s');
     $this->db->join('tab_region as r','r.id = s.region_id', 'left');
+	$this->db->join('tab_route_mapping as rm','rm.vehicle_id = s.id', 'left');
     if($order_by != ''){
     $this->db->order_by('s.id',$order_by);
     }
