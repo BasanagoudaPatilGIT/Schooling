@@ -336,7 +336,7 @@
         <div class="box-footer" align="right">
           <button type="submit" class="btn btn-sm btn-primary">Save</button>
           <button type="reset" class="btn btn-sm btn-primary">Reset</button>
-          <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>Students/grid_view/<?php echo $_SESSION['CLSID'] ?>"> <i class="fa fa-arrow-left"></i> Back</a> 
+          <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>Students/grid_view/<?php echo $_SESSION['CLSID'] ?>/<?php echo $_SESSION['SECID'] ?>"> <i class="fa fa-arrow-left"></i> Back</a> 
 		  </div>
       
     

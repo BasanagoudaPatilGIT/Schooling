@@ -19,31 +19,27 @@
           <table id="example1" class="table table-bordered table-striped table-responsive table-hover">
             <thead>
               <tr>
-			  
-                <th>Sl No</th>
-				<th>id</th>
-				<th>Picture</th>
+			  	<th>Roll Number</th>
                 <th>Student Name</th>
-				<th>Parent Name</th>
                 <th>Class</th>
+                <th>Section</th>
                 <th>SubjectTeacher</th>
+				<th>Parent Name</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <?php $slno = 0; ?>
               <?php foreach ($student as $row): ?>
-              <?php $slno = $slno + 1; ?>
               <tr>
-				<td align="center"><?php echo $slno; ?></td>
-				<td align="center"><?php echo $row['stdid']; ?></td>
-				<td><img class=" img-responsive img-sm"  
-                src="<?php echo base_url() ?>upload/profile/<?php echo $row['displaypicture']; ?>"/></td>
+				
+				 <td><?php echo $row['roll_num']; ?></td>
 				<td><a href="<?php echo base_url(); ?>Students/single_view/<?php echo $row['stdid'] ?>"> <?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></a></td>
-				<td><?php echo $row['pfirst_name'];?>&nbsp; <?php echo $row['pmiddle_name'];?>&nbsp; <?php echo $row['plast_name'];?></a></td>
-                <td><?php echo $row['class_name']; ?></td>
+				 <td><?php echo $row['class_name']; ?></td>
+				 <td><?php echo $row['class_section']; ?></td>
 				<td><a href="<?php echo base_url(); ?>Teachers/single_view/<?php echo $row['tid'] ?>"> <?php echo $row['tfirst_name'];?>&nbsp; <?php echo $row['tmiddle_name'];?>&nbsp; <?php echo $row['tlast_name'];?></a></td>
+				<td><?php echo $row['pfirst_name'];?>&nbsp; <?php echo $row['pmiddle_name'];?>&nbsp; <?php echo $row['plast_name'];?></a></td>
+               
 				<?php if(strtoupper($row['status']) != 'INACTIVE'   ){?>
                                 <td class="text-center"><span class="label" style="background-color:green; padding:5px; color:#fff"><?php echo $row['status'];?></span></td>
                                 <?php }elseif(strtoupper($row['status']) != 'ACTIVE'  ){?>

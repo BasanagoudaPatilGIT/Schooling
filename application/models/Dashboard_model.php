@@ -9,11 +9,11 @@
 	
 	public function get_class_record($order_by = 'ASC')
 	{
-	$this->db->select('c.*,s.*');
+	$this->db->select('c.*,s.id as secid,s.class_section');
 	$this->db->from('tab_class as c');
 	$this->db->join('tab_section as s', 's.class_id = c.id','left');
 	if($order_by != ''){
-	$this->db->order_by('s.class_id',$order_by);
+	$this->db->order_by('s.id',$order_by);
 	}
 	$query = $this->db->get();		
 	return $query->result_array();

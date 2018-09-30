@@ -79,12 +79,13 @@
     return $this->db->delete('tab_parents');
     }
     
-    public function view_record($order_by = '',$classid,$secid)
+    public function view_record($order_by,$classid,$secid)
     {
-    $this->db->select('s.*,s.id as stdid,c.id,c.class_name,t.first_name as tfirst_name,t.middle_name as tmiddle_name,t.last_name as tlast_name,t.id as tid');
+    $this->db->select('s.*,sc.class_section,s.id as stdid,c.id,c.class_name,t.first_name as tfirst_name,t.middle_name as tmiddle_name,t.last_name as tlast_name,t.id as tid');
     $this->db->select('p.first_name as pfirst_name,p.middle_name as pmiddle_name,p.last_name as plast_name');
     $this->db->from('tab_Students as s');
 	$this->db->join('tab_class as c','c.id = s.class_id', 'left');
+	$this->db->join('tab_section as sc','sc.id = s.section_id', 'left');
 	$this->db->join('tab_parents as p','p.student_id = s.id', 'left');
 	$this->db->join('tab_teacher_assignment as st','st.class_id = c.id', 'left');
 	$this->db->join('tab_teachers as t','t.id = st.teacher_id', 'left');

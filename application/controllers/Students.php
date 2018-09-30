@@ -167,7 +167,7 @@ class Students extends CI_Controller {
 			$this->User_model->add_record($data);
 			
 			$stud_count = $this->Students_model->classwise_students_count($this->input->post('cbo_class'));
-			print_r($stud_count);
+			//print_r($stud_count);
 			//SELECT MAX ID
 			$student_id = 1;
 			$this->db->select_max('id');
@@ -242,9 +242,14 @@ class Students extends CI_Controller {
 			
 			
 			$this->User_model->add_record($data);
-			echo '<script>alert("Record Added Successfully.");</script>';
+			$this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon fa fa-times"></i></button>
+				
+				<i class="icon fa fa-check"></i> Record Added Successfully.
+			  </div>
+			  ');
 			
-			redirect(base_url().'Students/grid_view'); 
+			redirect(base_url().'Students/grid_view/'.$_SESSION['CLSID'].'/'.$_SESSION['SECID']); 
 
 		}
 		
@@ -401,19 +406,25 @@ class Students extends CI_Controller {
 				
 			);	
 			
-			echo '<script>alert("Record Updated Successfully.");</script>';
 			$this->Students_model->edit_parent_record($id,$data);
 			
-			//$this->session->set_flashdata('msg','alert(<i class="icon fa fa-check"></i> Record Updated Successfully.)');
-				  
-			redirect(base_url().'index.php/Students/grid_view','refresh'); 			
+			$$this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon fa fa-times"></i></button>
+				
+				<i class="icon fa fa-check"></i> Record Added Successfully.
+			  </div>
+			  ');
+			redirect(base_url().'Students/grid_view/'.$_SESSION['CLSID'].'/'.$_SESSION['SECID']); 
+			
 		}		
 	}
 	
 	public function grid_view()
 	{
 		$id = $this->uri->segment(3);
+		$secid = $this->uri->segment(4); 
 		$_SESSION['CLSID'] = $id;
+		$_SESSION['SECID'] = $secid;
 		if ($id==0)
 		{
 			$this->index();			
@@ -422,7 +433,7 @@ class Students extends CI_Controller {
 		//GET DATA FROM TABLE
 		$order_by = 'DESC';	
 		//$usertype = 'Admin';	
-		$data['student'] = $this->Students_model->view_record('',$id);
+		$data['student'] = $this->Students_model->view_record($order_by,$id,$secid);
 		$data['title'] = $_SESSION['TITLE'].''."- Student List";
 		$data['selected_class'] = $this->Dashboard_model->get_selected_class_record('',$id);
 		$data['class_list'] = $this->Dashboard_model->get_class_record();

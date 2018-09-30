@@ -26,7 +26,6 @@
             <thead>
               <tr>
 			    <th>Sl No</th>
-				<th>Picture</th>
                 <th>Name</th>
                 <th>Position</th>
 			    <th>EmailId</th>
@@ -42,8 +41,6 @@
               <?php $slno = $slno + 1; ?>
               <tr>
 			    <td align="center"><?php echo $slno; ?></td>
-				<td><img class=" img-responsive img-sm"  
-                src="<?php echo base_url() ?>upload/profile/<?php echo $row['displaypicture']; ?>"/></td>
 				<td><a href="<?php echo base_url(); ?>Teachers/single_view/<?php echo $row['id'] ?>"> <?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></a></td>
                 <td><?php echo $row['position']; ?></td>
 				<td><?php echo $row['email']; ?></td>

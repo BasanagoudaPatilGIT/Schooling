@@ -3,7 +3,7 @@
   <div class="box">
 	<div class="box-header with-border">
         <h3 class="box-title"><i class="fa fa-address-card-o"></i> Student Details</h3>
-		<a class="btn btn-primary btn-sm pull-right" href="<?php echo base_url(); ?>Students/grid_view/<?php echo $student_row['class_id']; ?>"> <i class="fa fa-arrow-left"></i> Back</a>
+		<a class="btn btn-sm btn-primary pull-right" href="<?php echo base_url(); ?>Students/grid_view/<?php echo $_SESSION['CLSID'] ?>/<?php echo $_SESSION['SECID'] ?>"> <i class="fa fa-arrow-left"></i> Back</a> 
      </div>
   </div>
 
