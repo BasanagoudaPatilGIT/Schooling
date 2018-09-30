@@ -10,7 +10,7 @@
 		<li class="treeview"><a href="#"><i class="fa fa-address-card-o"></i><span>Student Management</span></a>
           <ul class="treeview-menu">
 		  <?php foreach ($class_list as $row): ?>
-		  <li><a href="<?php echo base_url()?>Students/grid_view/<?php echo $row['id']?>"> <span><?php echo $row['class_name']; echo " - "; echo $row['class_section']?></span></a></li>
+		  <li><a href="<?php echo base_url()?>Students/grid_view/<?php echo $row['id']?>/<?php echo $row['secid']?>"> <span><?php echo $row['class_name']; echo " - "; echo $row['class_section']?></span></a></li>
            <?php endforeach ?>
 		  </ul>
         </li>
