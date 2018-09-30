@@ -184,5 +184,19 @@ class Json extends CI_Controller
 		$this->output->set_output($output);
 	}
 	
+	public function get_vehicle_no()
+	{
+		$regionid = $this->uri->segment(3);
+		//echo($country_id);
+		
+		$data['result'] = $this->Json_model->get_vehicle_no($regionid);
+		
+		//print_r($data['result']);
+		
+		$output = json_encode( $data['result'] );
+		
+		$this->output->set_content_type('application/json');
+		$this->output->set_output($output);
+	}
 
 }

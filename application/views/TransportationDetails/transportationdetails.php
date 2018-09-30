@@ -67,7 +67,6 @@
 				<th>Vehicle Route</th>
 				<th>Vehicle Number</th>
 				<th>Vehicle Capacity</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -80,15 +79,6 @@
 				<td><?php echo $row['route_name']; ?></td>
 				<td><?php echo $row['vehicle_number'];?></td>
 				<td><?php echo $row['vehicle_capacity'];?></td>
-				
-				
-				
-				
-                <td align="center"><a class="btn btn-sm btn-warning btn-sm" href="<?php echo base_url() ?>Transpostation_details/updatetransportation/" title="Click to Update this TestCase"><i class="fa fa-edit fa-fw fa-lg"></i></a>
-                 <?php if(strtoupper($_SESSION['USER_TYPE']) == '' ){ ?>
-                  <a class="btn btn-danger btn-sm" href="" onClick="show_confirm('delete_record','<?php echo $row["id"] ?>')" title="Click to Delete this TestCase"><i class="fa fa-trash fa-fw fa-lg"></i></a>
-                  <?php } ?>
-                </td>
               </tr>
               <?php endforeach ?>
             </tbody>

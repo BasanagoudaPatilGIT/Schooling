@@ -157,5 +157,12 @@ class Json_model extends CI_Model
 		return $query->row_array();
 	}
 	
-	
+	public function get_vehicle_no($regionid)
+	{
+		$this->db->select('t.id,t.vehicle_number');
+		$this->db->from('tab_transportation as t');
+		$this->db->where('region_id',$regionid);
+		$query = $this->db->get();		
+		return $query->result_array();
+	}
 }

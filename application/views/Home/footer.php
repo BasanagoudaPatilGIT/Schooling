@@ -157,6 +157,34 @@ $('#cbo_class_list').change( function(){
 </script>
 
 <script>
+$(document).ready(function() {
+$('#cbo_region').change( function(){
+				var id = $('#cbo_region').val();
+				//alert(id);
+				
+				$.ajax({
+					url:"<?php echo base_url();?>json/get_vehicle_no/"+id,
+					success: function(data){
+						$("#cbo_vehicle_num option").each(function(index, element) {
+                            if( $(this).val() != '' ){
+								$(this).remove();
+							}
+							
+                        });
+						
+						$.each(data, function(key, value){
+							//alert(value.id + " " + value.class_section);
+							$("#cbo_vehicle_num").append("<option value='" + value.id + "'>" +  value.vehicle_number + "</option>");
+						});
+					},
+					error: function(){alert('Error');}
+				});
+			});
+});
+</script>
+
+
+<script>
 $('#teacherassingment').click( function(){
 	var id = $('#subid').val();
 	//alert(id);
