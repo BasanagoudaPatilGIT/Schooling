@@ -35,7 +35,6 @@ class Students extends CI_Controller {
 		$data['percbo_country'] = $this->Combo_model->cbo_country();
 		$data['pcbo_blood_group'] = $this->Combo_model->cbo_blood_group();
 		
-		//$data['cbo_rollnum'] = $this->Combo_model->cbo_rollnum();
 	
 	    // Field Validation
 		$this->form_validation->set_rules('admission_no','Admission Number','required');
@@ -61,7 +60,6 @@ class Students extends CI_Controller {
 		$this->form_validation->set_rules('pphone','Phone Number','required');
 		$this->form_validation->set_rules('cbo_class','Class','required');
 		$this->form_validation->set_rules('cbo_section','Section','required');
-		//$this->form_validation->set_rules('class','Class','required');
 		$this->form_validation->set_rules('pfirstname','First Name','required');
 		$this->form_validation->set_rules('pmiddlename','Middle Name','required');
 		$this->form_validation->set_rules('plastname','Last Name','required');
@@ -113,6 +111,9 @@ class Students extends CI_Controller {
 			$std_username = $this->input->post('username');
 			$std_password = base64_encode($this->input->post('password'));
 			$std_address = $this->input->post('peraddress');
+			$std_class_id = $this->input->post('cbo_class');
+			$std_section_id = $this->input->post('cbo_section');
+			$std_roll_num = (int)$this->input->post('rollnum');
 			$std_img_name = $displaypicture;
 			
 		$data =array
@@ -136,12 +137,10 @@ class Students extends CI_Controller {
 				'per_zipcode'=>$this->input->post('perzipcode'),
 				'phone'=>$std_mobile_no ,
 				'blood_group_id'=>$this->input->post('cbo_blood_group'),
-				//'username'=>$std_username,
-				//'password'=>$std_password,
 				'date_of_joining'=>$this->input->post('doj'),
-				'roll_num'=>$this->input->post('rollnum'),
-				'class_id'=>$this->input->post('cbo_class'),
-				'section_id'=>$this->input->post('cbo_section'),
+				'roll_num'=>$std_roll_num,
+				'class_id'=>$std_class_id,
+				'section_id'=>$std_section_id,
 				'displaypicture'=>$displaypicture
 				
 			);			
@@ -166,9 +165,6 @@ class Students extends CI_Controller {
 			
 			$this->User_model->add_record($data);
 			
-			$stud_count = $this->Students_model->classwise_students_count($this->input->post('cbo_class'));
-			//print_r($stud_count);
-			//SELECT MAX ID
 			$student_id = 1;
 			$this->db->select_max('id');
 			$query = $this->db->get('tab_students');
@@ -177,8 +173,7 @@ class Students extends CI_Controller {
 			{
 				$student_id = $row->id;
 			}
-			//////$pdisplaypicture ='Capture.jpg';
-			//echo($pdisplaypicture);
+			
 			if( !$this->upload->do_upload('pdisplaypicture') ){
 				print_r($this->upload->display_errors());
 			}else{
@@ -209,8 +204,6 @@ class Students extends CI_Controller {
 				'gender_id'=>$par_gender,
 				'phone'=>$par_mobile_no,
 				'blood_group_id'=>$this->input->post('pcbo_blood_group'),
-				//'username'=>$par_username,
-				//'password'=>$par_password,
 				'qualification'=>$this->input->post('pqual'),
 				'profession'=>$this->input->post('profession'),
 				'displaypicture'=>$pdisplaypicture,
@@ -238,10 +231,15 @@ class Students extends CI_Controller {
 				
 			);	
 			
-			
-			
-			
 			$this->User_model->add_record($data);
+			
+			$data =array
+			(
+				'count'=> (int)$std_roll_num + 1,
+				
+			);
+			$this->Student_model->update_class_count($data,$std_class_id,$std_section_id);
+			
 			$this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon fa fa-times"></i></button>
 				
@@ -297,7 +295,6 @@ class Students extends CI_Controller {
 		$this->form_validation->set_rules('cbo_sex','Gender','required');
 		$this->form_validation->set_rules('doj','Date of Joining','required');
 		$this->form_validation->set_rules('pphone','Phone Number','required');
-		//$this->form_validation->set_rules('class','Class','required');
 		$this->form_validation->set_rules('pfirstname','First Name','required');
 		$this->form_validation->set_rules('pmiddlename','Middle Name','required');
 		$this->form_validation->set_rules('plastname','Last Name','required');

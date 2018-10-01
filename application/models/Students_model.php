@@ -59,8 +59,16 @@
     public function edit_record($id,$data)
     {
     $this->db->where('id', $id);
-    $this->db->update('tab_Students', $data);		
+    $this->db->update('tab_Section', $data);		
     }
+	
+	public function update_class_count($data,$std_class_id,$std_section_id)
+    {
+    $this->db->where('class_id', $std_class_id);
+    $this->db->where('id', $std_section_id);
+    $this->db->update('tab_section', $data);		
+    }
+	
 	public function edit_parent_record($id,$data)
     {
     $this->db->where('student_id', $id);
