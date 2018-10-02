@@ -542,5 +542,25 @@ class Combo_model extends CI_Model
         return $result_combo = array_combine($id, $value);
     }
 	
+	function cbo_route_list()
+    { 
+        $this->db->select('id');
+        $this->db->select('route_name');
+        $this->db->from('tab_route_mapping');
+		$this->db->order_by('route_name', 'ASC');
+        $query = $this->db->get();
+        $result = $query->result();
+
+        $id = array('');
+        $value = array('-SELECT-');
+
+        for ($i = 0; $i < count($result); $i++)
+        {
+            array_push($id, $result[$i]->id);
+            array_push($value, $result[$i]->route_name);
+        }
+        return $result_combo = array_combine($id, $value);
+    }
+	
 }
       

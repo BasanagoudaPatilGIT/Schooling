@@ -33,7 +33,7 @@
 			</div>
 			</div>
 			 <div class="box-footer" align="right">
-          <button type="submit" class="btn btn-sm btn-primary">Add</button>
+          <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>  Add</button>
 		  </div>
 		  </form>
           </div>

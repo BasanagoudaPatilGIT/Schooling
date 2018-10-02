@@ -165,4 +165,13 @@ class Json_model extends CI_Model
 		$query = $this->db->get();		
 		return $query->result_array();
 	}
+	
+	public function get_route_list($vehilceid)
+	{
+		$this->db->select('rt.id,rt.route_name');
+		$this->db->from('tab_route_mapping as rt');
+		$this->db->where('vehicle_id',$vehilceid);
+		$query = $this->db->get();		
+		return $query->result_array();
+	}
 }

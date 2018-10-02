@@ -17,7 +17,8 @@
     <div class="box-body">
       <!-- general form elements -->
       <!-- form start -->
-      <form role="form" method="post" action="<?php echo base_url()?>Students/updateStudent/<?php echo $student_row['id'] ?>" enctype="multipart/form-data">
+      <form role="form" method="post" action="<?php echo base_url()?>Students/updateStudent/<?php echo $student_row['id'] ?>" autocomplete="off"
+	   enctype="multipart/form-data">
         <div class="box-body">
           <div class="col-sm-6">
             <div class="h4"><i class="fa fa-bandcamp" aria-hidden="true"></i> Personal Details</div>
@@ -173,6 +174,55 @@
                     <?php } ?>
                   </div>
             </div>
+			<!-- Transportaion starts-->
+		  <div class="h4"><i class="fa fa-bus" aria-hidden="true"></i> Transportaion Details</div>
+          <div class="panel panel-primary col-sm-12"  style="padding:12px;">
+		  <div class="row">
+		  <div class="form-group col-sm-6">
+                  <label for="region">Region </label>
+                  <span style="color:#FF0000">*</span>
+				  <?php $attributes = 'class = "form-control" id = "cbo_region_list" name = "cbo_region_list"';
+                        echo form_dropdown('cbo_region_list',$cbo_region_list,$student_row['region_id'], $attributes);
+                   ?></div>
+				   <div class="col-sm-6 form-group">
+                <label for="section">Vehicle Number</label><span style="color:#FF0000">*</span>
+				<?php $attributes = 'class = "form-control" id = "cbo_vehicle_num_list" name = "cbo_vehicle_num_list"';
+                        echo form_dropdown('cbo_vehicle_num_list',$cbo_vehicle_num_list,$student_row['vehicle_id'], $attributes);
+                   ?>
+              </div>
+				<div class="col-sm-6 form-group">
+                <label for="Class">Route</label><span style="color:#FF0000">*</span>
+				<?php $attributes = 'class = "form-control" id = "cbo_route_list" name = "cbo_route_list"';
+                        echo form_dropdown('cbo_route_list',$cbo_route_list,$student_row['route_id'], $attributes);
+                   ?>
+				   <?php echo form_error('cbo_route_list','<div style="color:#FF0000;">','</div>'); ?>
+              </div>
+			  
+			<div class="col-sm-6 form-group" style="padding:0px">
+			  <!-- time Picker -->
+              <div class="col-sm-6 form-group">
+                <label>Pickup time:</label>
+					<div class="input-group">
+                    <input type="text" class="form-control timepicker" id="picktime" name="picktime" value="<?php echo $student_row['pickup_time']?>" 
+					onkeyup="isalphanum(this)">
+						
+                  </div>
+                  <!-- /.input group -->
+              </div><!-- time Picker -->
+			  <div class="col-sm-6 form-group">
+                <label>Drop time:</label>
+					<div class="input-group">
+                    <input type="text" class="form-control timepicker" id="droptime" name="droptime" value="<?php echo $student_row['drop_time']?>" 
+					onkeyup="isalphanum(this)">
+						
+                  </div>
+                  <!-- /.input group -->
+              </div><!-- time Picker -->
+			  </div>
+			 </div>
+			</div>
+		  
+		  <!-- Transportation ends-->
           </div>
           <div class="col-sm-6">
           <div class="h4"><i class="fa fa-building" aria-hidden="true"></i> School Details</div>
@@ -193,7 +243,9 @@
               </div>
 			  <div class="col-sm-6 form-group">
                 <label for="section">Section</label>
-				<input type="text" class="form-control" id="section" name="section" placeholder="Section" disabled="" value="<?php echo set_value('section')?>">
+				<?php $attributes = 'class = "form-control" id = "cbo_section" name = "cbo_section" disabled=""';
+                        echo form_dropdown('cbo_section',$cbo_section,$student_row['section_id'], $attributes);
+                   ?>
               </div>
               <div class="col-sm-6 form-group">
                 <label for="empcode">Roll Nummber</label>
@@ -344,7 +396,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer" align="right">
-          <button type="submit" class="btn btn-sm btn-primary">Save</button>
+          <button type="submit" class="btn btn-sm btn-primary">Update</button>
           <button type="reset" class="btn btn-sm  btn-primary">Reset</button>
           <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>Students/grid_view/<?php echo $_SESSION['CLSID'] ?>/<?php echo $_SESSION['SECID'] ?>"> <i class="fa fa-arrow-left"></i> Back</a> </div>
       </form>

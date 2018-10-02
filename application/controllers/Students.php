@@ -34,6 +34,11 @@ class Students extends CI_Controller {
 		$data['cbo_country'] = $this->Combo_model->cbo_country();
 		$data['percbo_country'] = $this->Combo_model->cbo_country();
 		$data['pcbo_blood_group'] = $this->Combo_model->cbo_blood_group();
+		$data['student_count'] = $this->Students_model->series_count($usertype = 3);
+		$data['year'] = mdate(date('Y'));
+		$data['cbo_region_list'] = $this->Combo_model->cbo_region();
+		$data['cbo_vehicle_num_list'] = $this->Combo_model->cbo_vehicle_num();
+		$data['cbo_route_list'] = $this->Combo_model->cbo_route_list();
 		
 	
 	    // Field Validation
@@ -115,6 +120,7 @@ class Students extends CI_Controller {
 			$std_section_id = $this->input->post('cbo_section');
 			$std_roll_num = (int)$this->input->post('rollnum');
 			$std_img_name = $displaypicture;
+			$std_count = (int)$data['student_count']['count'];
 			
 		$data =array
 			(
@@ -141,7 +147,10 @@ class Students extends CI_Controller {
 				'roll_num'=>$std_roll_num,
 				'class_id'=>$std_class_id,
 				'section_id'=>$std_section_id,
-				'displaypicture'=>$displaypicture
+				'displaypicture'=>$displaypicture,
+				'route_id' =>$this->input->post('cbo_route_list'),
+				'pickup_time' =>$this->input->post('picktime'),
+				'drop_time' =>$this->input->post('droptime')
 				
 			);			
 			$this->Students_model->add_record($data);
@@ -173,7 +182,7 @@ class Students extends CI_Controller {
 			{
 				$student_id = $row->id;
 			}
-			
+			$pdisplaypicture ='Capture.jpg';
 			if( !$this->upload->do_upload('pdisplaypicture') ){
 				print_r($this->upload->display_errors());
 			}else{
@@ -212,7 +221,7 @@ class Students extends CI_Controller {
 			);				
 			$this->Students_model->add_parent_record($data);
 			
-			print_r($data);
+			//print_r($data);
 			
 			$data =array
 			(
@@ -238,7 +247,17 @@ class Students extends CI_Controller {
 				'count'=> (int)$std_roll_num + 1,
 				
 			);
-			$this->Student_model->update_class_count($data,$std_class_id,$std_section_id);
+			$this->Students_model->update_class_count($data,$std_class_id,$std_section_id);
+			
+			$data = array (
+			
+			'count' => (int)$std_count + 1,
+			
+			);
+			
+			//print_r($data['count']);
+			
+			$this->Students_model->update_series_count($data,$usertype=3);
 			
 			$this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon fa fa-times"></i></button>
@@ -266,7 +285,7 @@ class Students extends CI_Controller {
 		//GET DATA FROM TABLE
 		$data['student_row'] = $this->Students_model->get_record_by_id($id);
 		$data['parent_row'] = $this->Students_model->get_parent_record_by_id($id);
-		
+		$data['cbo_section'] = $this->Combo_model->cbo_section();
 		
 		$data['cbo_class'] = $this->Combo_model->cbo_class();
 		$data['cbo_sex'] = $this->Combo_model->cbo_sex();
@@ -276,9 +295,11 @@ class Students extends CI_Controller {
 		$data['cbo_country'] = $this->Combo_model->cbo_country();
 		$data['percbo_country'] = $this->Combo_model->cbo_country();
 		$data['percbo_blood_group'] = $this->Combo_model->cbo_blood_group();
+		$data['cbo_region_list'] = $this->Combo_model->cbo_region();
+		$data['cbo_vehicle_num_list'] = $this->Combo_model->cbo_vehicle_num();
+		$data['cbo_route_list'] = $this->Combo_model->cbo_route_list();
 	
 	    // Field Validation
-		$this->form_validation->set_rules('admission_no','Admission Number','required');
 		$this->form_validation->set_rules('firstname','First Name','required');
 		$this->form_validation->set_rules('middlename','Middle Name','required');
 		$this->form_validation->set_rules('lastname','Last Name','required');
@@ -293,7 +314,6 @@ class Students extends CI_Controller {
 		$this->form_validation->set_rules('perzipcode','Zipcode','required|max_length[6]|min_length[6]');
 		$this->form_validation->set_rules('dob','Date Of Birth','required');
 		$this->form_validation->set_rules('cbo_sex','Gender','required');
-		$this->form_validation->set_rules('doj','Date of Joining','required');
 		$this->form_validation->set_rules('pphone','Phone Number','required');
 		$this->form_validation->set_rules('pfirstname','First Name','required');
 		$this->form_validation->set_rules('pmiddlename','Middle Name','required');
@@ -379,11 +399,14 @@ class Students extends CI_Controller {
 				'phone'=>$this->input->post('phone'),
 				'blood_group_id'=>$this->input->post('cbo_blood_group'),
 				'date_of_leaving'=>$this->input->post('dol'),
-				'displaypicture'=>$displaypicture
+				'displaypicture'=>$displaypicture,
+				'route_id' =>$this->input->post('cbo_route_list'),
+				'pickup_time' =>$this->input->post('picktime'),
+				'drop_time' =>$this->input->post('droptime')
 				
 			);	
 			//print_r('blood_group_id');			
-			$this->Students_model->edit_record($id,$data);
+			$this->Students_model->update_record($id,$data);
 			
 			$data =array
 			(
@@ -405,12 +428,15 @@ class Students extends CI_Controller {
 			
 			$this->Students_model->edit_parent_record($id,$data);
 			
-			$$this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
+			  
+			  
+			  $this->session->set_flashdata('msg','<div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="icon fa fa-times"></i></button>
 				
-				<i class="icon fa fa-check"></i> Record Added Successfully.
+				<i class="icon fa fa-check"></i> Record Updated Successfully.
 			  </div>
 			  ');
+			  
 			redirect(base_url().'Students/grid_view/'.$_SESSION['CLSID'].'/'.$_SESSION['SECID']); 
 			
 		}		
@@ -442,7 +468,7 @@ class Students extends CI_Controller {
 	
 	public function parent_grid_view()
 	{
-		$data['title'] = $_SESSION['TITLE'].''."- Student list";
+		$data['title'] = $_SESSION['TITLE'].''."- Parents list";
 		//GET DATA FROM TABLE
 		$order_by = 'DESC';	
 		//$usertype = 'Admin';	
@@ -489,7 +515,7 @@ class Students extends CI_Controller {
 		//GET DATA FROM TABLE
 		$data['student_row'] = $this->Students_model->get_single_view($id);
 		$data['parent_row'] = $this->Students_model->get_parent_single_view($id);
-		$data['title'] = $_SESSION['TITLE'].''."- Student List";
+		$data['title'] = $_SESSION['TITLE'].''."- Student view";
 		$data['class_list'] = $this->Dashboard_model->get_class_record();
 		$this->load->view('Home/header',$data);
 		$this->load->view('Home/menu',$data);
@@ -509,7 +535,7 @@ class Students extends CI_Controller {
 		//GET DATA FROM TABLE
 		$data['student_row'] = $this->Students_model->get_single_view($id);
 		$data['parent_row'] = $this->Students_model->get_parent_single_view($id);
-		$data['title'] = $_SESSION['TITLE'].''."- Student List";
+		$data['title'] = $_SESSION['TITLE'].''."- Parent view";
 		$data['class_list'] = $this->Dashboard_model->get_class_record();
 		$this->load->view('Home/header',$data);
 		$this->load->view('Home/menu',$data);

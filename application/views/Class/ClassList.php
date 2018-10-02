@@ -51,7 +51,7 @@
 			</div>
 			</div>
 			 <div class="box-footer" align="right">
-          <button type="submit" class="btn btn-sm btn-primary">update</button>
+          <button type="submit" class="btn btn-sm btn-primary"> update  <i class="fa fa-arrow-right"></i></button>
 		  </div>
 		  </form>
           </div>
@@ -82,7 +82,7 @@
               <?php $slno = $slno + 1; ?>
               <tr>
 			    <td><?php echo $slno; ?></td>
-				<td><a href="<?php echo base_url() ?>Classes/single_view/<?php echo $row["id"] ?>" title="Click to view class details"><?php echo $row['class_name'];?></a></td>
+				<td><?php echo $row['class_name'];?></td>
 				
 				<td><?php echo $row['class_section'];?></td>
 				<td><?php echo $row['first_name'];?>&nbsp; <?php echo $row['middle_name'];?>&nbsp; <?php echo $row['last_name'];?></td>

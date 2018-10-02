@@ -44,6 +44,7 @@
 <script src="<?php echo base_url() ?>LTE-Jar/bower_components/dataTables.net/js/jquery.dataTables.min.js"></script>
 
 <script src="<?php echo base_url() ?>LTE-Jar/bower_components/dataTables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
 <script type="text/javascript">
 function passvar(id)
 { 
@@ -182,7 +183,64 @@ $('#cbo_region').change( function(){
 			});
 });
 </script>
-
+<script>
+$(document).ready(function() {
+$('#cbo_region_list').change( function(){
+				var id = $('#cbo_region_list').val();
+				//alert(id);
+				
+				$.ajax({
+					url:"<?php echo base_url();?>json/get_vehicle_no/"+id,
+					success: function(data){
+						$("#cbo_vehicle_num_list option").each(function(index, element) {
+                            if( $(this).val() != '' ){
+								$(this).remove();
+							}
+							
+							
+                        });
+						$("#cbo_route_list option").each(function(index, element) {
+                            if( $(this).val() != '' ){
+								$(this).remove();
+							}
+							
+                        });
+						$.each(data, function(key, value){
+							//alert(value.id + " " + value.class_section);
+							$("#cbo_vehicle_num_list").append("<option value='" + value.id + "'>" +  value.vehicle_number + "</option>");
+						});
+					},
+					error: function(){alert('Error');}
+				});
+			});
+});
+</script>
+<script>
+$(document).ready(function() {
+$('#cbo_vehicle_num_list').change( function(){
+				var id = $('#cbo_vehicle_num_list').val();
+				//alert(id);
+				
+				$.ajax({
+					url:"<?php echo base_url();?>json/get_route_list/"+id,
+					success: function(data){
+						$("#cbo_route_list option").each(function(index, element) {
+                            if( $(this).val() != '' ){
+								$(this).remove();
+							}
+							
+                        });
+						
+						$.each(data, function(key, value){
+							//alert(value.id + " " + value.class_section);
+							$("#cbo_route_list").append("<option value='" + value.id + "'>" +  value.route_name + "</option>");
+						});
+					},
+					error: function(){alert('Error');}
+				});
+			});
+});
+</script>
 
 <script>
 $('#teacherassingment').click( function(){

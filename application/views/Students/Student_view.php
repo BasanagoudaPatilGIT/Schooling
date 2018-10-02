@@ -32,6 +32,10 @@
 			<div class="box-body">
 			<div class="col-sm-6"> 
 			<div class="col-sm-12 form-group ">
+			<label>Roll Number :</label>
+			<?php echo $student_row['roll_num']?>&nbsp;
+			</div>
+			<div class="col-sm-12 form-group ">
 			<label>Name :</label>
 			<?php echo $student_row['first_name']?>&nbsp;
 			<?php echo $student_row['middle_name']?>&nbsp;
@@ -39,7 +43,7 @@
 			</div>
 			<div class="col-sm-12 form-group">
 			<label>Class :</label>
-			<?php echo $student_row['class_name']?>&nbsp;
+			<?php echo $student_row['class_name']; echo " - "; echo $student_row['class_section']?>&nbsp;
 			</div>
 			<div class="col-sm-12 form-group ">
 			<label>Parent Name :</label>
@@ -96,7 +100,7 @@
 		
   </div>
 </div>
-
+	</section>
 </div>
 
 

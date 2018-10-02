@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Oct 01, 2018 at 01:09 PM
+-- Generation Time: Oct 02, 2018 at 01:31 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -36,40 +36,6 @@ CREATE TABLE IF NOT EXISTS `tab_basic` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dumping data for table `tab_basic`
---
-
-INSERT INTO `tab_basic` (`user_id`, `browser_name`, `last_access`, `id`) VALUES
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-21 07:09:07', 1),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-21 07:19:37', 2),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-21 07:27:26', 3),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-21 08:55:31', 4),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-21 09:13:42', 5),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-21 09:22:23', 6),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-21 09:36:04', 7),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-23 09:41:03', 8),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-23 12:14:04', 9),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-23 13:49:36', 10),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-23 16:48:35', 11),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-24 08:18:13', 12),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-24 09:54:47', 13),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-24 18:49:01', 14),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-25 07:00:33', 15),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-26 07:15:11', 16),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-26 16:18:21', 17),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-27 11:44:07', 18),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-27 18:28:38', 19),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-28 09:37:49', 20),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-29 06:05:12', 21),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-29 06:27:57', 22),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-09-29 07:23:00', 23),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-30 08:00:40', 24),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-30 12:23:45', 25),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 7', '2018-09-30 15:32:15', 26),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-10-01 12:41:17', 27),
-('Nagamma yoga', 'Chrome;69.0.3497.100;;Windows 10', '2018-10-01 12:52:43', 28),
-('Basanagouda Patil', 'Chrome;69.0.3497.100;;Windows 10', '2018-10-01 12:55:35', 29);
 
 -- --------------------------------------------------------
 
@@ -162,6 +128,13 @@ CREATE TABLE IF NOT EXISTS `tab_parents` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Dumping data for table `tab_parents`
+--
+
+INSERT INTO `tab_parents` (`id`, `status`, `user_type`, `first_name`, `middle_name`, `last_name`, `email`, `date_of_birth`, `gender_id`, `phone`, `blood_group_id`, `qualification`, `profession`, `displaypicture`, `student_id`, `created_date`) VALUES
+(1, 'Active', 'Parents', 'Ravish', 'C', 'Patil', 'tested@gmail.com', '1965-05-03', 1, '8282783829', '1', 'SSLC', 'Police', 'Capture.jpg', 1, '2018-10-01 23:21:57');
+
 -- --------------------------------------------------------
 
 --
@@ -217,7 +190,13 @@ CREATE TABLE IF NOT EXISTS `tab_registration` (
 --
 
 INSERT INTO `tab_registration` (`id`, `first_name`, `middle_name`, `last_name`, `user_type`, `email_id`, `username`, `password`, `ent_id`, `created_date`, `status`, `img_name`, `mobile_no`, `address`, `gender`, `imei`, `pc_login`, `mobi_login`) VALUES
-(1, 'Basanagouda', 'D', 'Patil', '1', 'basupatil71@gmail.com', 'Basanagouda', 'NzI1OTk5OTI4Mg==', 1, '2018-07-31 10:56:03', 'Active', 'IMG11.jpg', '7259999282', 'H.No 336/2C Neelambhika Nivas\r\nQuality Buildings Panth nagar \r\nPanth Balekundri BK Belgaum - 591103\r\nState - Karnataka', 0, 0, 1, 0);
+(1, 'Basanagouda', 'D', 'Patil', '1', 'basupatil71@gmail.com', 'Basanagouda', 'NzI1OTk5OTI4Mg==', 1, '2018-07-31 10:56:03', 'Active', 'IMG11.jpg', '7259999282', 'H.No 336/2C Neelambhika Nivas\r\nQuality Buildings Panth nagar \r\nPanth Balekundri BK Belgaum - 591103\r\nState - Karnataka', 0, 0, 1, 0),
+(2, 'Ramesh', 'R', 'Pujeri', '3', 'ganu@gmail.com', 'Basu7838483', 'MTIzNDU2Nzg=', 2, '2018-10-01 23:09:18', 'Active', 'Capture.jpg', '9876543234', 'iiufdhcskc', 1, 0, 0, 0),
+(3, 'Ramesh', 'R', 'Pujeri', '3', 'ganu@gmail.com', 'Basu7838483', 'MTIzNDU2Nzg=', 3, '2018-10-01 23:13:41', 'Active', 'Capture.jpg', '9876543234', 'iiufdhcskc', 1, 0, 0, 0),
+(4, 'Ramesh', 'R', 'Pujeri', '3', 'ganu@gmail.com', 'Basu7838483', 'MTIzNDU2Nzg=', 4, '2018-10-01 23:15:45', 'Active', 'Capture.jpg', '9876543234', 'iiufdhcskc', 1, 0, 0, 0),
+(5, 'Ravish', 'C', 'Patil', '5', 'tested@gmail.com', 'User14253', 'MTIzNDU2Nzg=', 5, '2018-10-01 23:15:46', 'Active', 'Capture.jpg', '8282783829', 'iiufdhcskc', 1, 0, 0, 0),
+(6, 'Ramesh', 'R', 'Pujeri', '3', 'ganu@gmail.com', 'Basu7838483', 'MTIzNDU2Nzg=', 6, '2018-10-01 23:21:57', 'Active', 'Capture.jpg', '9876543234', 'iiufdhcskc', 1, 0, 0, 0),
+(7, 'Ravish', 'C', 'Patil', '5', 'tested@gmail.com', 'User14253', 'MTIzNDU2Nzg=', 7, '2018-10-01 23:21:57', 'Active', 'Capture.jpg', '8282783829', 'iiufdhcskc', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -264,7 +243,7 @@ CREATE TABLE IF NOT EXISTS `tab_section` (
 --
 
 INSERT INTO `tab_section` (`id`, `count`, `status`, `class_id`, `class_capacity`, `class_number`, `class_location`, `created_date`, `class_section`) VALUES
-(1, 1, 'Active', 1, 30, 101, '1st Floor', '2018-10-01 18:32:29', 'A'),
+(1, 2, 'Active', 1, 30, 101, '1st Floor', '2018-10-01 23:21:57', 'A'),
 (2, 1, 'Active', 1, 30, 102, '1st Floor', '2018-09-01 05:34:13', 'B'),
 (3, 1, 'Active', 2, 30, 103, '1st Floor', '2018-09-01 05:34:13', 'A'),
 (4, 1, 'Active', 2, 30, 104, '1st Floor', '2018-09-01 05:34:13', 'B'),
@@ -305,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `tab_series` (
 
 INSERT INTO `tab_series` (`id`, `user_type`, `count`, `changed_datetime`) VALUES
 (1, 4, 1005, '2018-09-27 15:24:07'),
-(2, 3, 1, '2018-10-01 18:25:03');
+(2, 3, 2, '2018-10-01 23:21:57');
 
 -- --------------------------------------------------------
 
@@ -359,12 +338,19 @@ CREATE TABLE IF NOT EXISTS `tab_students` (
   `class_id` int(20) DEFAULT NULL,
   `section_id` int(10) NOT NULL,
   `route_id` int(10) DEFAULT NULL,
-  `pickup_time` time DEFAULT NULL,
-  `drop_time` time DEFAULT NULL,
+  `pickup_time` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `drop_time` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `displaypicture` varchar(60) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `tab_students`
+--
+
+INSERT INTO `tab_students` (`id`, `status`, `user_type`, `admission_no`, `first_name`, `middle_name`, `last_name`, `email`, `date_of_birth`, `gender_id`, `address`, `city`, `country_id`, `zipcode`, `per_address`, `per_city`, `per_country_id`, `per_zipcode`, `phone`, `blood_group_id`, `date_of_joining`, `date_of_leaving`, `roll_num`, `class_id`, `section_id`, `route_id`, `pickup_time`, `drop_time`, `displaypicture`, `created_date`) VALUES
+(1, 'Active', 'Student', '2018 - 1', 'Ramesh', 'R', 'Pujeri', 'ganu@gmail.com', '1991-05-17', 1, 'H.No 336/2c Neelambhika nivas ', 'Belgaum', 1, 591103, 'iiufdhcskc', 'City123', 1, '637262', '9876543234', '1', '2018-10-01', '0000-00-00', 1, 1, 1, 2, '09:00 AM', '06:50 PM', 'Capture.jpg', '2018-10-01 23:21:57');
 
 -- --------------------------------------------------------
 

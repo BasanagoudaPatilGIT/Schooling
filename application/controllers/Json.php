@@ -198,5 +198,20 @@ class Json extends CI_Controller
 		$this->output->set_content_type('application/json');
 		$this->output->set_output($output);
 	}
+	
+	public function get_route_list()
+	{
+		$routeid = $this->uri->segment(3);
+		//echo($country_id);
+		
+		$data['result'] = $this->Json_model->get_route_list($routeid);
+		
+		//print_r($data['result']);
+		
+		$output = json_encode( $data['result'] );
+		
+		$this->output->set_content_type('application/json');
+		$this->output->set_output($output);
+	}
 
 }

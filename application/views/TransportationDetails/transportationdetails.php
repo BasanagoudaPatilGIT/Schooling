@@ -44,7 +44,7 @@
 				
 			</div>
 			 <div class="box-footer" align="right">
-          <button type="submit" class="btn btn-sm btn-primary">Add</button>
+          <button type="submit" class="btn btn-sm btn-primary"> <i class="fa fa-plus"></i> Add</button>
 		  </div>
 		  </form>
           </div>
@@ -128,7 +128,7 @@
 		
 		</div>
         <div class="modal-footer">
-		<button id="addvehicle" type="submit" class="btn btn-sm btn-primary">Add</button>
+		<button id="addvehicle" type="submit" class="btn btn-sm btn-primary">  <i class="fa fa-plus"></i> Add</button>
 		  <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
         </div>
 		</form>

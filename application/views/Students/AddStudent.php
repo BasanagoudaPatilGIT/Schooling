@@ -18,7 +18,7 @@
       
       <!-- /.box-header -->
       <!-- form start -->
-      <form role="form" method="post" action="<?php echo base_url()?>Students/addstudent" enctype="multipart/form-data">
+      <form role="form" method="post" action="<?php echo base_url()?>Students/addstudent" enctype="multipart/form-data" autocomplete="off">
         <div class="box-body">
           <div class="col-sm-6">
             <div class="h4"><i class="fa fa-bandcamp" aria-hidden="true"></i> Personal Details</div>
@@ -180,8 +180,51 @@
                 <p class="help-block">* Max 3 MB Upload </p>
               </div>
             </div>
-          </div>
-          <div class="col-sm-6">
+		  <div class="h4"><i class="fa fa-bus" aria-hidden="true"></i> Transportaion Details</div>
+          <div class="panel panel-primary col-sm-12"  style="padding:12px;">
+		  <div class="row">
+		  <div class="form-group col-sm-6">
+                  <label for="region">Region </label>
+				  <?php $attributes = 'class = "form-control" id = "cbo_region_list" name = "cbo_region_list"';
+                        echo form_dropdown('cbo_region_list',$cbo_region_list,set_value('cbo_region_list'), $attributes);
+                   ?></div>
+				<div class="col-sm-6 form-group">
+                <label for="section">Vehicle Number</label>
+				<?php $attributes = 'class = "form-control" id = "cbo_vehicle_num_list" name = "cbo_vehicle_num_list"';
+                        echo form_dropdown('cbo_vehicle_num_list',$cbo_vehicle_num_list,set_value('cbo_vehicle_num_list'), $attributes);
+                   ?>
+              </div>
+			  <div class="col-sm-6 form-group">
+                <label for="Class">Route</label>
+				<?php $attributes = 'class = "form-control" id = "cbo_route_list" name = "cbo_route_list"';
+                        echo form_dropdown('cbo_route_list',$cbo_route_list,set_value('cbo_route_list'), $attributes);
+                   ?>
+              </div>
+			  <div class="col-sm-6 form-group" style="padding:0px">
+			  <!-- time Picker -->
+              <div class="col-sm-6 form-group">
+                <label>Pickup time:</label>
+					<div class="input-group">
+                    <input type="text" class="form-control date" id="picktime" name="picktime" placeholder="hh:mm AM" value="<?php echo set_value('picktime')?>" >
+                    </div>
+                  <!-- /.input group -->
+              </div><!-- time Picker -->
+			  <div class="col-sm-6 form-group">
+                <label>Drop time:</label>
+					<div class="input-group">
+                    <input type="text" class="form-control date" id="droptime" name="droptime" placeholder="hh:mm PM"  value="<?php echo set_value('droptime')?>" 
+					onkeyup="isalphanum(this)">
+                  </div>
+                  <!-- /.input group -->
+              </div><!-- time Picker -->
+			 
+        
+			  </div>
+			 </div>
+			</div>
+		 <!-- Transportation ends-->
+          </div><!-- div col-sm-6-->
+		  <div class="col-sm-6">
           <div class="h4"><i class="fa fa-building" aria-hidden="true"></i> School Details</div>
           <div class="panel panel-primary col-sm-12"  style="padding:12px;">
 		  <div class="row">
@@ -189,7 +232,7 @@
                   <label for="firstname">Admission number: </label>
                   <span style="color:#FF0000">*</span>
                   <input type="text" class="form-control" id="admission_no" name="admission_no"  readonly=""
-				  value="<?php echo set_value('admission_no')?>"></div>
+				  value="<?php echo $year; echo " - "; echo $student_count['count'] ?>"></div>
 				<div class="col-sm-6 form-group">
                 <label for="Class">Class</label><span style="color:#FF0000">*</span>
 				<?php $attributes = 'class = "form-control" id = "cbo_class" name = "cbo_class"';
@@ -206,7 +249,7 @@
               </div>
               <div class="col-sm-6 form-group">
                 <label for="empcode">Roll Nummber</label>
-                <input type="text" class="form-control" id="rollnum" name="rollnum" placeholder="Roll Number" readonly="" value="<?php echo set_value('rollnum')?>">
+                <input type="text" class="form-control" id="rollnum" name="rollnum" placeholder="Roll Number" readonly="">
 				<?php echo form_error('rollnum','<div style="color:#FF0000;">','</div>'); ?>
               </div>
 			  <div class="col-sm-6 form-group">

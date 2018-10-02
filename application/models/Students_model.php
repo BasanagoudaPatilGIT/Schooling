@@ -56,6 +56,12 @@
     return $this->db->insert('tab_parents', $data);
     }
     
+	public function update_record($id,$data)
+    {
+    $this->db->where('id', $id);
+    $this->db->update('tab_Students', $data);		
+    }
+	
     public function edit_record($id,$data)
     {
     $this->db->where('id', $id);
@@ -135,8 +141,15 @@
     
     public function get_record_by_id($id)
     {
-    $this->db->where('id', $id);
-    $query = $this->db->get('tab_Students');
+	$this->db->select('r.*,rm.vehicle_id,ts.region_id');
+    $this->db->from('tab_students as r');
+    $this->db->join('tab_section as s','s.id = r.section_id', 'left');
+    $this->db->join('tab_route_mapping as rm','rm.id = r.route_id', 'left');
+    $this->db->join('tab_transportation as ts','ts.id = rm.vehicle_id', 'left');
+	
+    $this->db->where('r.id', $id);
+    $query = $this->db->get();		
+    return $query->row_array();
     
     return $query->row_array();
     }
@@ -151,12 +164,13 @@
     
     public function get_single_view($id)
     {
-    $this->db->select('r.*,se.gender_type,c.country_name,co.country_name as per_country_name,cl.class_name,cl.id as class_id');
+    $this->db->select('r.*,se.gender_type,c.country_name,co.country_name as per_country_name,cl.class_name,s.class_section');
     $this->db->from('tab_Students as r');
     $this->db->join('tab_country as c','c.id = r.country_id', 'left');
     $this->db->join('tab_country as co','co.id = r.per_country_id', 'left');
     $this->db->join('tab_sex as se','se.id = r.gender_id', 'left');
 	$this->db->join('tab_class as cl','cl.id = r.class_id', 'left');
+	$this->db->join('tab_section as s','s.id = r.section_id', 'left');
     $this->db->where('r.id', $id);
     $query = $this->db->get();
     
@@ -180,12 +194,27 @@
     {
     return $this->db->count_all_results('tab_Students');
     }
-   public function classwise_students_count($id)
+	
+	public function update_series_count($data,$usertype)
+    {
+		$this->db->where('user_type', $usertype);
+		$this->db->update('tab_series', $data);
+	}
+   	
+	public function classwise_students_count($id)
     {
 	$this->db->from('tab_students as p');
 	$this->db->where('p.class_id', $id);
     $query = $this->db->get();
     return $query->row_array();
     }
-    
-    }
+    public function series_count($usertype)
+    {
+		$this->db->select('count,u.user_type_name');
+		$this->db->from('tab_series as r');
+		$this->db->join('tab_user_type as u','u.id = r.user_type', 'left');
+		$this->db->where('user_type',$usertype );
+		$query = $this->db->get();
+		return $query->row_array();
+	}
+}
