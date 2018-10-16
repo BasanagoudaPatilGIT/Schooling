@@ -29,7 +29,7 @@
 		
 		<li><a href="<?php echo base_url()?>Marks/grid_view"><i class="fa fa-list-ol"></i> <span>Marks</span></a></li>
 		<li><a href="<?php echo base_url()?>Exams/grid_view"><i class="fa fa-pencil-square "></i> <span>Exams</span></a></li>
-		<li><a href="<?php echo base_url()?>Events/grid_view"><i class="fa fa-camera-retro"></i> <span>Events</span></a></li>
+		<li><a href="<?php echo base_url()?>Event/eventdetails"><i class="fa fa-camera-retro"></i> <span>Events</span></a></li>
 		<li><a href="<?php echo base_url()?>Events/grid_view"><i class="fa fa-calendar"></i> <span>TimeTable</span></a></li>
 		<li><a href="<?php echo base_url()?>Events/grid_view"><i class="fa fa-file-text "></i> <span>Leave</span></a></li>
 		<li><a href="<?php echo base_url()?>TransportationDetails/transportation_details"><i class="fa fa-bus"></i> <span>Transportation</span></a></li>

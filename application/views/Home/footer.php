@@ -63,7 +63,31 @@ error: function(){alert('Error');}
 }
 
 </script>
-
+<script>
+<!-- ******************************************add****************************************** --> 	
+$(document).ready(function() {
+			var a= 0;
+			$('#add_desc').click(function(){
+				a= a+1;
+				if( a<= 5){
+				desc_row = $('#family_Block li:first').clone(true);
+				desc_row.find('input[type=text]').val('');
+				$('#family_Block').append(desc_row);
+				}
+				else{
+					alert('more');
+				}
+			});
+				
+		   $('.remove_desc').click(function(){
+				//alert('xyz');
+			if ( $('#family_Block li').length > 1 ){
+				$(this).closest('li').remove();
+			}getTotal()
+		   });
+		<!-- ******************************************add****************************************** --> 	
+});
+		</script>
 <script>
 $(document).ready(function() {
 $('#cbo_class').change( function(){
