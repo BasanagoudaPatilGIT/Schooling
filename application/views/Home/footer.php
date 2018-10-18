@@ -69,13 +69,13 @@ $(document).ready(function() {
 			var a= 0;
 			$('#add_desc').click(function(){
 				a= a+1;
-				if( a<= 5){
+				if( a< 5){
 				desc_row = $('#family_Block li:first').clone(true);
 				desc_row.find('input[type=text]').val('');
 				$('#family_Block').append(desc_row);
 				}
 				else{
-					alert('more');
+					alert('Only 5 images are allowed for each event');
 				}
 			});
 				
@@ -657,7 +657,7 @@ $('#testupload').click( function(){
 
 <script>
 
-//FAMILY ADD
+//Image ADD
   $('#add_desc').click(function(){
 		//alert('xyz');
 		
@@ -675,7 +675,7 @@ $('#testupload').click( function(){
 		$(this).closest('li').remove();
 		getTotal()
 	}
-   });//FAMILY END
+   });//Image END
 </script>
 
 

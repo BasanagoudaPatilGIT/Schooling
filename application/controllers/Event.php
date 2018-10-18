@@ -15,32 +15,27 @@ class Event extends CI_Controller {
 		$this->load->model('Dashboard_model');
 		
 	}
+	
 	public function eventdetails()
 	{
-		$data['title'] = $_SESSION['TITLE'].''."- Event";
 		$data['class_list'] = $this->Dashboard_model->get_class_record();
 		$order_by = 'DESC';	
 		$user_id = $_SESSION['ID'];
 		$data['event'] = $this->Event_model->view_record($order_by);
-		echo "<pre>";
-		print_r($data['event']);
-		echo "</pre>";
+		//echo "<pre>";
+		//print_r($data['event']);
+		//echo "</pre>";
 		$data['event_images'] = $this->Event_model->first_image_view_record($order_by,$user_id);
 		$data['event_images_all'] = $this->Event_model->images_view_record($user_id);
-		//$this->load->view('Home/header',$data);
-		//$this->load->view('Home/menu',$data);
-		//$this->load->view('Event/grid_view',$data);
-		//$this->load->view('Home/footer');
-	}
-	
-	public function addEvent()
-	{
+		
+		
 		$this->form_validation->set_rules('event_name','Event Name','required');
 		$this->form_validation->set_rules('about_event','About Event','required');
 		
+		
 		if(($this->form_validation->run())==false)
 		{
-			$data['title'] = $_SESSION['TITLE'].''."- Add Event";
+			$data['title'] = $_SESSION['TITLE'].''."- Event details";
 			$data['class_list'] = $this->Dashboard_model->get_class_record();
 			$this->load->view('Home/header',$data);
 			$this->load->view('Home/menu',$data);

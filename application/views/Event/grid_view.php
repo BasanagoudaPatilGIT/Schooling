@@ -9,7 +9,7 @@
 
   <?php 
 			$this->load->helper('directory'); //load directory helper
-			$dir = "upload/event/"; // Your Path to folder
+			$dir = "upload/event"; // Your Path to folder
 			$map = directory_map($dir); /* This function reads the directory path specified in the first parameter and builds an array representation of it and all its contained files. */			
   ?>
    
@@ -63,42 +63,46 @@
         <h4 class="modal-title">Event Details</h4>
       </div>
       
-	  <form role="form" method="post" action="<?php echo base_url()?>Event/addEvent" enctype="multipart/form-data" autocomplete="off">
+	  <form role="form" method="post" action="<?php echo base_url()?>Event/eventdetails" enctype="multipart/form-data" autocomplete="off">
 		  <div class="form-group col-sm-12">
 		  <label for="event_name">Event Name: </label>
 		   <span style="color:#FF0000">*</span>
-		  <input type="text" name="event_name" class="form-control"/>
+		  <input type="text" name="event_name" id="event_name" class="form-control" placeholder="Event Name"/>
+		   <?php echo form_error('event_name','<div style="color:#FF0000;">','</div>'); ?> 
 		  </div>
 		  <div class="form-group col-sm-12">
 		  <label for="about_event">About Event: </label>
 		  <span style="color:#FF0000">*</span>
-		  <textarea class="form-control" id="about_event" name="about_event" rows="3" cols="3" placeholder="About Event" 
+		  <textarea class="form-control"id="about_event" name="about_event" rows="3" cols="3" placeholder="About Event" 
 		  value="<?php echo set_value('about_event')?>" onkeyup="isalpha(this)"></textarea>
-		  <?php echo form_error('about_event','<div style="color:#FF0000;">','</div>'); ?> </div>
+		  <?php echo form_error('about_event','<div style="color:#FF0000;">','</div>'); ?> 
+		  </div>
 		  <div class="col-sm-12">
-			<button class="btn btn-success" id="add_desc" type="button"><i class="fa fa-plus"></i></button>
-			<span style="color:#FF0000; font-weight:bolder; padding-left:15px;">Note:&nbsp;.JPG .PNG Images Only
+			<span style="color:#FF0000; font-weight:bolder;">Note:&nbsp;.JPG .PNG Images Only
 			</span>
-			<br/>
+			</div>
+			<div class="col-sm-12">
+			<button class="btn btn-sm btn-success" id="add_desc" type="button"><i class="fa fa-plus"></i></button>
 			</div>
 		 
 		 
-		 <div class="col-sm-12" style="padding:10px 0px;">
-		 <ul id="family_Block" style="list-style:none">
-		 <li>
+		 <div class="col-sm-12" style="padding:0px;">
+		 <ul id="family_Block" style="list-style:none; padding:0px;">
+		 <li style="padding:0px;">
 	   <!--panel body -->
-		  <div class="box-body " style="overflow: hidden;">
+		  <div class="box-body ">
 		   <div class="col-sm-12 form-group">
-			
+		   
+			<div class="col-sm-10 form-group">
 			<input type="file" name="image_name[]" id="" /> 
-			
+			</div>
+			<div class="col-sm-2 form-group">
+			<button type="button" class="btn btn-sm btn-success remove_desc" data-dismiss="alert"
+			  aria-hidden="true">×</button>
 		
 		   </div> 
-		  </div><!--panel body end -->
-		  <div class="col-sm-1 form-group">
-			   <button type="button" class="btn btn-success remove_desc" data-dismiss="alert"
-			  aria-hidden="true">×</button>
-				</div>
+		</div><!--panel body end -->
+		 </div>
 		 </li>
 		 </ul>
 		 </div>
